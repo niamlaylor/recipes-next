@@ -1,11 +1,13 @@
 .recipeList {
-  border: 2px solid grey;
+  border: 1px solid grey;
   border-radius: 5px;
   width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .recipeList > ul {

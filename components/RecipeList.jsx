@@ -6,7 +6,8 @@ export default function(props) {
     <section className={styles.recipeList}>
       <h2>My list</h2>
       <ul>
-        <RecipeListItem />
+        <RecipeListItem recipeName={"Macaroni and cheese"}/>
+        <RecipeListItem recipeName={"Salmon burgers"}/>
       </ul>
     </section>
   );
