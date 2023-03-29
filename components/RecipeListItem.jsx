@@ -1,16 +1,24 @@
 import styles from '../styles/RecipeListItem.module.css';
 import LabelList from './LabelList';
+import { useRouter } from 'next/router';
 
-export default function(props) {
+export default function RecipeListItem({id, name, website, duration, labels, image}) {
+
+  const router = useRouter();
+
+  const handleRecipeClick = (recipeId) => {
+    router.push(`/recipes/${recipeId}`);
+  }
+
   return (
-    <li className={styles.recipeListCard}>
+    <li className={styles.recipeListCard} onClick={() => handleRecipeClick(id)}>
       <div className={styles.recipeTitleSource}>
-        <h3>{props.recipeName}</h3>
-        <label>from cooking.com</label>
-        <label>2h 30m</label>
-        <LabelList />
+        <h3>{name}</h3>
+        <label>from {website}</label>
+        <label>{duration}m</label>
+        <LabelList labels={labels}/>
       </div>
-      <img className={styles.recipeImage} src={'https://www.allrecipes.com/thmb/55m3_k4qDl5NZsToQ6eNyOcQBT0=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/11679-homemade-mac-and-cheese-chef-mo-3x2-1-f0f5582e8dd549d18e56b95cece93045.jpg'}></img>
+      <img className={styles.recipeImage} src={image}></img>
     </li>
   );
 }

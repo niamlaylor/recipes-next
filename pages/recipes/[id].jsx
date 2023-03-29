@@ -1,3 +1,5 @@
+import { mockRecipes } from "../index"
+
 export default function Recipe() {
-  return <h1>First Post</h1>
+  return <h1>{mockRecipes[0].name}</h1>
 };
