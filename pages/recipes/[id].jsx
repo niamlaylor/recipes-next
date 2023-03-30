@@ -1,8 +1,8 @@
 'use client'
-import { useState, useEffect } from "react";
 import { useRouter } from 'next/router'
 import { mockRecipes } from "../index";
 import RecipeCard from "../../components/recipe-card/RecipeCard";
+import Header from '../../components/navigation/Header';
 
 export default function Recipe() {
 
@@ -17,5 +17,11 @@ export default function Recipe() {
     return <div>Loading...</div>
   }
 
-  return <RecipeCard recipe={recipe}/>
+  return (
+    <>
+      <Header/>
+      <RecipeCard recipe={recipe}/>
+    </>
+  
+  )
 };

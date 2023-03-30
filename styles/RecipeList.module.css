@@ -1,9 +1,7 @@
 .recipeList {
-  border-radius: 5px;
   width: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   margin-left: auto;
   margin-right: auto;

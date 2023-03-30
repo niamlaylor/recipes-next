@@ -17,5 +17,5 @@ export default function RecipeCard({ recipe }) {
       </div>
     </article>
 
-  )
-}
+  );
+};

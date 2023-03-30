@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import axios from 'axios';
-import styles from '../styles/Home.module.css';
 import RecipeList from '../components/RecipeList';
+import Header from '../components/navigation/Header';
+import AddRecipeForm from '../components/forms/AddRecipeForm';
 
 export const mockRecipes = [
   {
@@ -64,10 +65,12 @@ export const mockRecipes = [
 export default function Home() {
 
   return (
-    <main className={styles.recipeList}>
-      <section>
+    <>
+    <Header />
+      <main className="mainList">
         <RecipeList recipes={mockRecipes}/>
-      </section>
-    </main>
+        <AddRecipeForm />
+      </main>
+    </>
   )
 }
