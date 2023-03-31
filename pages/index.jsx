@@ -66,7 +66,7 @@ export default function Home() {
 
   return (
     <>
-    <Header />
+      <Header />
       <main className="mainList">
         <RecipeList recipes={mockRecipes}/>
         <AddRecipeForm />
