@@ -6,9 +6,12 @@
 .headerNavList {
   display: flex;
   justify-content: space-between;
+  display: flex;
+  padding-inline-end: 40px
 }
 
 .headerNavList > li {
   list-style: none;
   padding-right: 10px;
+  align-self: center;
 }
