@@ -1,15 +1,19 @@
+import { headerNav, headerNavList, headerNavItem } from "../../styles/Header.module.css"
 import NavLink from "./NavLink"
 
 export default function Header() {
   return (
     <header>
-      <nav role="navigation" aria-label="Site">
-        <ul>
-          <li>
-            <NavLink href={"/recipes/1"}>View Recipe</NavLink>
+      <nav className={headerNav} role="navigation" aria-label="Site">
+        <ul className={headerNavList}>
+          <li className={headerNavItem}>
+            <NavLink href={"/"}>My list</NavLink>
           </li>
           <li>
-            <NavLink href={"/"}>Home</NavLink>
+            <NavLink href={"/recipes/1"}>Sifter</NavLink>
+          </li>
+          <li>
+            <NavLink href={"/login"}>Login</NavLink>
           </li>
         </ul>
       </nav>

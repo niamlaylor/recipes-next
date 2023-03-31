@@ -1,0 +1,14 @@
+.headerNav {
+  background-color: #DCCCC0;
+  width: 100%;
+}
+
+.headerNavList {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerNavList > li {
+  list-style: none;
+  padding-right: 10px;
+}
