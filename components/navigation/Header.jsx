@@ -11,6 +11,7 @@ export default function Header() {
           </li>
           <li>
             <NavLink href={"/recipes/1"}>Sifter</NavLink>
+            <img src=""></img>
           </li>
           <li>
             <NavLink href={"/login"}>Login</NavLink>
