@@ -1,6 +1,7 @@
 .headerNav {
-  background-color: #DCCCC0;
   width: 100%;
+  border-bottom: 1px solid #E7E5E8;
+  margin-bottom: 30px;
 }
 
 .headerNavList {
