@@ -10,7 +10,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 40%
 }
 
 .addRecipeInput {
@@ -20,15 +19,18 @@
   border-radius: 5px;
   font-size: 16px;
   color:rgb(109, 109, 109);
-  width: 200%;
 }
 
 .addRecipeButton {
-  background-color: #4CAF50;
+  background-color: #542307;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
+}
+
+.addRecipeButton:hover {
+  background-color: #85573d;
 }
