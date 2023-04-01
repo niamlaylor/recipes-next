@@ -11,3 +11,18 @@ body {
   margin: 0;
   font-family: 'Nunito Sans', sans-serif;
 }
+
+#sifterLogo {
+  display: flex;
+  justify-content: center;
+  padding-right: 0;
+}
+
+#sifterLogo > a {
+  display: flex;
+  justify-content: center;
+}
+
+#sifterLogo > a > img {
+  width: 50%;
+}

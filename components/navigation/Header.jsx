@@ -1,5 +1,6 @@
 import { headerNav, headerNavList, headerNavItem } from "../../styles/Header.module.css"
 import NavLink from "./NavLink"
+import Link from "next/link";
 
 export default function Header() {
   return (
@@ -9,9 +10,10 @@ export default function Header() {
           <li className={headerNavItem}>
             <NavLink href={"/"}>My list</NavLink>
           </li>
-          <li>
-            <NavLink href={"/recipes/1"}>Sifter</NavLink>
-            <img src=""></img>
+          <li id="sifterLogo">
+            <Link href={"/"}>
+              <img src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/sifterLogo.png"></img>
+            </Link>
           </li>
           <li>
             <NavLink href={"/login"}>Login</NavLink>
