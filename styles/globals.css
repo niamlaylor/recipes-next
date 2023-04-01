@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap');
+
 .mainList {
   display: flex;
   flex-direction: column;
@@ -7,4 +9,5 @@
 
 body {
   margin: 0;
+  font-family: 'Nunito Sans', sans-serif;
 }
