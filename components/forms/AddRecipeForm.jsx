@@ -16,7 +16,7 @@ export default function AddRecipeForm(props) {
           value={website}
           onChange={event => setWebsite(event.target.value)}
         />
-        <button className={styles.addRecipeButton}>Submit</button>
+        <button className={styles.addRecipeButton} type="submit">Submit</button>
       </form>
     </section>
   );
