@@ -87,6 +87,9 @@ export async function getServerSideProps() {
 
 export default function Home({ recipes = [] } ) {
 
+  // Uncomment next line and pass into AddRecipeForm as an onSubmit prop once prisma is configured
+  // const addRecipe = data => axios.post('/api/recipes', data);
+
   return (
     <>
       <Header />
