@@ -16,7 +16,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
         <h3>{name}</h3>
         <label>from {website}</label>
         <label>{duration}m</label>
-        <LabelList labels={labels}/>
+        {/* <LabelList labels={labels}/> */}
       </div>
       <img className={styles.recipeImage} src={image}></img>
     </li>
