@@ -9,10 +9,11 @@ export default function RecipeList({ recipes }) {
       <RecipeListItem
         key={recipe.id}
         id={recipe.id}
-        name={recipe.name}
-        website={recipe.website}
+        name={recipe.title}
+        website={recipe.url}
         duration={recipe.duration}
         labels={recipe.labels}
+        image={recipe.image_url}
       />
     )
   })

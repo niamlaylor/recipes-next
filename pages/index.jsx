@@ -62,13 +62,36 @@ export const mockRecipes = [
   }
 ];
 
-export default function Home() {
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+export async function getServerSideProps() {
+  // Get all homes
+  let recipes = await prisma.recipe.findMany();
+  // Pass the data to the Home page
+  recipes = recipes.map(recipe => {
+    return {
+      ...recipe,
+      user_id: Number(recipe.user_id),
+      id: Number(recipe.id)
+    }
+  })
+  return {
+    props: {
+      recipes: JSON.parse(JSON.stringify(recipes)),
+    },
+  };
+}
+
+
+export default function Home({ recipes = [] } ) {
 
   return (
     <>
       <Header />
       <main className="mainList">
-        <RecipeList recipes={mockRecipes}/>
+        <RecipeList recipes={recipes}/>
         <AddRecipeForm />
       </main>
     </>
