@@ -23,7 +23,8 @@ export default function RecipeCard({ recipe }) {
     <div className={styles.row}>
     <div className={styles.description}>
       <h2>{recipe.name}</h2>
-      <p>{recipe.website}</p>
+      <p>from {recipe.website}</p>
+      <p>The Instant Pot® truly shines in this quick and simple dish. Chicken thighs are sautéed first and then cook alongside long-grain rice until moist and tender. The rice gets added flavor from the chicken and is perfectly done at the same time thanks to the ease of using the Instant Pot®. The best part of this simple dish? It's all ready to eat in under an hour!</p>
     </div>
 
 
