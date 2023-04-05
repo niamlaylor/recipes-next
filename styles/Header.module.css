@@ -16,3 +16,7 @@
   padding-right: 10px;
   align-self: center;
 }
+
+.headerNavList li:last-child {
+  padding-right: 0px;
+}
