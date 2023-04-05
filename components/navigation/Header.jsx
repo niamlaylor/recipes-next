@@ -2,7 +2,7 @@ import { headerNav, headerNavList, headerNavItem } from "../../styles/Header.mod
 import NavLink from "./NavLink"
 import Link from "next/link";
 
-export default function Header() {
+export default function Header( { userLoggedIn, onLoggedInPage } ) {
   return (
     <header>
       <nav className={headerNav} role="navigation" aria-label="Site">
@@ -15,9 +15,9 @@ export default function Header() {
               <img src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/sifterLogo.png"></img>
             </Link>
           </li>
-          <li>
-            <NavLink href={"/login"}>Login</NavLink>
-          </li>
+          { userLoggedIn && !onLoggedInPage && <li><NavLink href={"/"}>Welcome!</NavLink></li> }
+          { onLoggedInPage && <li><NavLink href={"/"}>Sign up</NavLink></li> }
+          { !onLoggedInPage && <li><NavLink href={"/login"}>Login</NavLink></li>}
         </ul>
       </nav>
     </header>
