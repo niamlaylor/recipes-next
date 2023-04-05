@@ -56,6 +56,8 @@ export default function AddRecipeForm(props) {
                         name="url"
                         autoComplete="off"
                         autoFocus
+                        value={website}
+                        onChange={event => setWebsite(event.target.value)}
                       />
                       <Button
                         fullWidth
