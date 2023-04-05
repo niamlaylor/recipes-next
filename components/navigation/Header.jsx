@@ -20,8 +20,8 @@ export default function Header( { userLoggedIn, onLoggedInPage } ) {
           </li>
           { userLoggedIn && !onLoggedInPage && <li><NavLink href={"/"}>Welcome!</NavLink></li> }
           {/* Button Styles for Login & Sign Up Links */}
-          { onLoggedInPage && <li><Button variant="contained" href={"/"}>Sign Up</Button></li> }
-          { !onLoggedInPage && <li><Button variant="contained" href={"/login"}>Login</Button></li>}
+          { onLoggedInPage && <li><Button variant="contained" size="large" href={"/"}>Sign Up</Button></li> }
+          { !onLoggedInPage && <li><Button variant="contained" size="large" href={"/login"}>Login</Button></li>}
     
         </ul>
       </nav>
