@@ -1,8 +1,10 @@
 import { headerNav, headerNavList, headerNavItem } from "../../styles/Header.module.css"
 import NavLink from "./NavLink"
 import Link from "next/link";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Button from '@mui/material/Button';
 
-//const theme = createTheme();
+const theme = createTheme();
 
 
 export default function Header( { userLoggedIn, onLoggedInPage } ) {
@@ -19,8 +21,10 @@ export default function Header( { userLoggedIn, onLoggedInPage } ) {
             </Link>
           </li>
           { userLoggedIn && !onLoggedInPage && <li><NavLink href={"/"}>Welcome!</NavLink></li> }
-          { onLoggedInPage && <li><NavLink href={"/"}>Sign up</NavLink></li> }
-          { !onLoggedInPage && <li><NavLink href={"/login"}>Login</NavLink></li>}
+          {/* Button Styles for Login & Sign Up Links */}
+          { onLoggedInPage && <li><Button variant="contained" href={"/"}>Sign up</Button></li> }
+          { !onLoggedInPage && <li><Button variant="contained" href={"/login"}>Login</Button></li>}
+    
         </ul>
       </nav>
     </header>
