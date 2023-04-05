@@ -14,7 +14,25 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../components/navigation/Header';
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    //Main colour, dark brown
+    primary: {
+      main: '#542307'
+    },
+    //Secondary colour, light brown
+    secondary: {
+      main: '#DCCCC0'
+    }
+  },
+  //Nunito Sans font
+  typography: {
+    fontFamily: 'Nunito Sans',
+    fontWeightRegular: 400,
+    fontWeightBold: 700
+  }
+});
+
 
 export default function LogIn() {
   const handleSubmit = (event) => {
