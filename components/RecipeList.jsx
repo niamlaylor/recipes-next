@@ -19,7 +19,7 @@ export default function RecipeList({ recipes }) {
   })
   return (
     <section className={styles.recipeList}>
-      <h2>My list</h2>
+      <h2>My List</h2>
       <ul>
         {recipeList}
       </ul>
