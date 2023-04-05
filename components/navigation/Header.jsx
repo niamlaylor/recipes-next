@@ -2,6 +2,9 @@ import { headerNav, headerNavList, headerNavItem } from "../../styles/Header.mod
 import NavLink from "./NavLink"
 import Link from "next/link";
 
+//const theme = createTheme();
+
+
 export default function Header( { userLoggedIn, onLoggedInPage } ) {
   return (
     <header>
