@@ -59,6 +59,14 @@
   position: relative;
 }
 
+.badge span {
+    display: inline-block;
+    background-color: #AEC5D2;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+  }
+
 .content {
   width: 100%;
   background: rgba(220, 204, 192, 0.5);
