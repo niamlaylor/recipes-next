@@ -92,6 +92,15 @@ export default function LogIn() {
               label="Remember me"
             />
             <Button
+              type="button"
+              fullWidth
+              variant="contained"
+              onClick={() => signIn()}
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign in with Google
+            </Button>
+            <Button
               type="submit"
               fullWidth
               variant="contained"
