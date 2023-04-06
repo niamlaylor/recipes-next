@@ -28,9 +28,9 @@ export default function RecipeList({ recipes }) {
   })
   return (
     
-    <section style= {{marginLeft:"20px"}}>
+    <section style= {{marginLeft:"50px", marginRight:"50px"}}>
       <h2>My List</h2>
-      <Grid container spacing={1}>
+      <Grid container spacing={2}>
         {recipeList}
         </Grid>
     </section>
