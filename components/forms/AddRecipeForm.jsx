@@ -1,5 +1,7 @@
 //import styles from '../../styles/forms/AddRecipeForm.module.css'
 import { useState } from "react";
+import axios from 'axios';
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
@@ -31,6 +33,35 @@ export default function AddRecipeForm(props) {
   const [website, setWebsite] = useState(props.website || "");
   const handleSubmit = event => event.preventDefault();
 
+  const getRecipe = async (event) => {
+    event.preventDefault();
+    const fetchOptions = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8"
+      },
+      body: JSON.stringify({
+        url: event.target.url.value
+      })
+    };
+    const recipeData = await fetch("/api/get-recipe/", fetchOptions).then(
+      (res) => {
+        res.json().then((recipeJson) => {
+          console.log(typeof recipeJson);
+          axios.post('/api/recipes', recipeJson).then((response) => {
+            console.log("Axios request successful");
+            console.log(response);
+          }).catch((error) => {
+            console.log("Axios request error");
+            console.log(error);
+          });
+        });
+      }
+    );
+    return recipeData;
+  };
+
   return (
           <ThemeProvider theme={theme}>
                 <Container component="main" maxWidth="lg">
@@ -46,7 +77,7 @@ export default function AddRecipeForm(props) {
                     <Typography component="h1" variant="h5">
                       Paste a Recipe URL
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, minWidth: 500 }}>
+                    <Box component="form" onSubmit={getRecipe} noValidate sx={{ mt: 1, minWidth: 500 }}>
                       <TextField
                         margin="normal"
                         required
@@ -77,7 +108,7 @@ export default function AddRecipeForm(props) {
 
     {/* PREVIOUS STYLING: 
     <section className={styles.formSection}>
-      <form className={styles.addRecipeForm} onSubmit={event => event.preventDefault()} autoComplete="off">
+      <form className={styles.addRecipeForm} onSubmit={getRecipe} autoComplete="off">
         <input
           className ={styles.addRecipeInput}
           name="url"
