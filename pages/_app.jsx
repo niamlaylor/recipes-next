@@ -1,6 +1,8 @@
 import '../styles/globals.css'
 import { SessionProvider } from 'next-auth/react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Footer from '../components/footer/Footer';
+
 
 const theme = createTheme({
   palette: {
@@ -26,6 +28,7 @@ export default function App({ session, Component, pageProps }) {
     <SessionProvider session={session}>
       <ThemeProvider theme={theme}>
           <Component {...pageProps} />
+          <Footer />
       </ThemeProvider>
     </SessionProvider>
   )
