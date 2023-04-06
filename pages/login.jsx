@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../components/navigation/Header';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 const theme = createTheme({
   palette: {
@@ -35,6 +36,9 @@ const theme = createTheme({
 
 
 export default function LogIn() {
+
+  const { data: session } = useSession();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -87,6 +91,15 @@ export default function LogIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            <Button
+              type="button"
+              fullWidth
+              variant="contained"
+              onClick={() => signIn()}
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign in with Google
+            </Button>
             <Button
               type="submit"
               fullWidth

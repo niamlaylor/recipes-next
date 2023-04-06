@@ -13,6 +13,12 @@ Enter the URL of a great recipe, and we'll send it back with what you need - so 
 3. Start the web server using the `npm run dev` command.
 4. Check out **Sifter** at <http://localhost:/>.
 
+## Run a production build
+Make sure the development server isn't running, then run this command:
+```
+npm run build && npm run start
+```
+
 ## Dependencies
 
 - Next.js

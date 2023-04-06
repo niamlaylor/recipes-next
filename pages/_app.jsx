@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import { SessionProvider } from 'next-auth/react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -20,10 +21,12 @@ const theme = createTheme({
   }
 });
 
-export default function App({ Component, pageProps }) {
+export default function App({ session, Component, pageProps }) {
   return (
-    <ThemeProvider theme={theme}>
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <SessionProvider session={session}>
+      <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+      </ThemeProvider>
+    </SessionProvider>
   )
 }
