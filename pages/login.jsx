@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../components/navigation/Header';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
 const theme = createTheme({
   palette: {
@@ -35,6 +36,9 @@ const theme = createTheme({
 
 
 export default function LogIn() {
+
+  const { data: session } = useSession();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
