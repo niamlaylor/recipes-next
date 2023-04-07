@@ -23,11 +23,9 @@ export default function Header() {
                 <img src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/sifterLogo.png"></img>
               </Link>
             </li>
-            <li>
-              <NavLink href={"/account"}>Welcome {session.user.name}</NavLink>
-            </li>
             {/* Button Styles for Login & Sign Up Links */}
             <li>
+              <NavLink href={"/account"}>Welcome {session.user.name}</NavLink>
               <Button variant="contained" size="large" onClick={() => signOut()}>Sign out</Button>
             </li>
           </ul>
@@ -51,6 +49,9 @@ export default function Header() {
             <li>
               <Button variant="contained" size="large" href={"/login"}>
                 Login
+              </Button>
+              <Button variant="contained" size="large" href={"/signup"}>
+                Sign up
               </Button>
             </li>
           </ul>
