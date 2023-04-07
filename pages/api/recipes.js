@@ -16,7 +16,8 @@ export default async function handler(req, res) {
           url: req.body.url,
           ingredients: req.body.ing,
           instructions: req.body.dir,
-          img_url: req.body.img
+          img_url: req.body.img,
+          description: req.body.desc
         }
       });
       const updatedRecipe = JSON.stringify(

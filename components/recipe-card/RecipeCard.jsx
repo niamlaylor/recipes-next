@@ -36,6 +36,7 @@ export default function RecipeCard({ recipe }) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  console.log(recipe)
 
 {/* Recipe card wrapped in div to center whole thing */}
   return (
@@ -67,9 +68,7 @@ export default function RecipeCard({ recipe }) {
         <Typography 
         variant="body1"
         color="text.secondary">
-        **We currently don't have the description in our db but I'll add it** If you are looking for new, delicious ways to enjoy chicken breast, this seared chicken smothered in a creamy sauce is the recipe of your dreams. Not only is it bursting with incredible flavor, but it’s so quick and simple to make!
-
-        This creamy chicken breast recipe is also ideal for those who are looking for a low-carb meal and a keto-friendly diet recipe.
+        {recipe.description}
         </Typography>
 
       </CardContent>
