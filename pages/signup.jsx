@@ -14,32 +14,14 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../components/navigation/Header';
 
-const theme = createTheme({
-  palette: {
-    //Main colour, dark brown
-    primary: {
-      main: '#542307'
-    },
-    //Secondary colour, light brown
-    secondary: {
-      main: '#DCCCC0'
-    }
-  },
-  //Nunito Sans font
-  typography: {
-    fontFamily: 'Nunito Sans',
-    fontWeightRegular: 400,
-    fontWeightBold: 700
-  }
-});
-
-export default function SignUp() {
+export default function SignUp( { theme }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get('email'),
       password: data.get('password'),
+      confirmPassword: data.get('confirmPassword'),
     });
   };
 
@@ -64,25 +46,15 @@ export default function SignUp() {
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12}>
                   <TextField
-                    autoComplete="given-name"
-                    name="firstName"
+                    autoComplete="full-name"
+                    name="fullName"
                     required
                     fullWidth
-                    id="firstName"
-                    label="First Name"
+                    id="fullName"
+                    label="Full Name"
                     autoFocus
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="lastName"
-                    label="Last Name"
-                    name="lastName"
-                    autoComplete="family-name"
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -106,7 +78,17 @@ export default function SignUp() {
                     autoComplete="new-password"
                   />
                 </Grid>
-
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="confirmPassword"
+                    label="Confirm password"
+                    type="password"
+                    id="confirmPassword"
+                    autoComplete="new-password"
+                  />
+                </Grid>
               </Grid>
               <Button
                 type="submit"
