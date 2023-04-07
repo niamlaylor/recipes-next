@@ -6,24 +6,24 @@ import Grid from '@mui/material/Grid';
 
 export default function RecipeList({ recipes }) {
 
+  console.log(recipes)
+
   const recipeList = recipes.map(recipe => {
     return (
         
-        <Grid item xs={6} 
+      <Grid item xs={6} 
         key={recipe.id}
         md={3}
-        >
-
-           <RecipeListItem
-        id={recipe.id}
-        name={recipe.title}
-        website={recipe.url}
-        duration={recipe.duration}
-        labels={recipe.labels}
-        image={recipe.image_url}
-      />
-
-        </Grid>
+      >
+        <RecipeListItem
+          id={recipe.id}
+          name={recipe.title}
+          website={recipe.url}
+          duration={recipe.duration}
+          labels={recipe.labels}
+          image={recipe.img_url}
+        />
+      </Grid>
     )
   })
   return (
