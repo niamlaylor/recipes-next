@@ -64,7 +64,8 @@ export default function RecipeCard({ recipe }) {
   {/* Recipe card wrapped in div to center whole thing */}
   return (
     <div 
-    style={{ display:'flex', justifyContent:'center' }}>
+    style={{ display:'flex', justifyContent:'center' }}
+    sx={{ pt: 2}}>
 
     <Card sx={{ maxWidth: 900 }}
           style={{backgroundColor: '#DCCCC0'}}>
@@ -103,7 +104,7 @@ export default function RecipeCard({ recipe }) {
     <IconButton aria-label="recipe source">
       <RestaurantIcon />
     </IconButton>
-    <a href={recipe.url}>{website}</a>
+    <a style={{ color: '#542307'}} href={recipe.url}>{website}</a>
     </Typography>
     
     <Typography>
