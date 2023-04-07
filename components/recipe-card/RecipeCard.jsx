@@ -36,7 +36,6 @@ export default function RecipeCard({ recipe }) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  console.log(recipe)
 
 {/* Recipe card wrapped in div to center whole thing */}
   return (
