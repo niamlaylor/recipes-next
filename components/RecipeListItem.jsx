@@ -36,6 +36,8 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
 
   const router = useRouter();
 
+  const url = new URL(website).hostname;
+
   const handleRecipeClick = (recipeId) => {
     router.push(`/recipes/${recipeId}`);
   }
@@ -60,10 +62,10 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
           {name}
         </Typography>
         <Typography variant="body2">
-          From {website}
+          From {url}
         </Typography>
         <Typography gutterBottom variant="body2" component="div">
-          {duration} mins
+          {duration !== 'undefined' ? `${duration} minutes` : ''}
         </Typography>
 
         <IconButton aria-label="edit" sx={{color: theme.palette.primary.main}}>
