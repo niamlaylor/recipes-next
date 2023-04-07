@@ -46,7 +46,8 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
     <ThemeProvider theme={theme}>
       <Card style={{backgroundColor: theme.palette.secondary.main}} 
         sx={{ maxWidth: 350, 
-              minHeight: 400, 
+              minHeight: 360,
+              maxHeight: 400, 
               ':hover': {
                 boxShadow: 10
               }, 
