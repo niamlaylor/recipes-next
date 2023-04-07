@@ -42,9 +42,8 @@ export default function AddRecipeForm(props) {
       console.log('Recipe data:', recipeJson);
       const response = await axios.post('/api/recipes', recipeJson);
       console.log("Axios request successful", response);
-      let recipeId = await JSON.parse(response.data);
-      recipeId = recipeId.id
-      await router.push(`/recipes/${recipeId}`);
+      const recipeId = await JSON.parse(response.data);
+      await router.push(`/recipes/${recipeId.id}`);
     } catch (error) {
       console.log("Axios request error", error);
     }
