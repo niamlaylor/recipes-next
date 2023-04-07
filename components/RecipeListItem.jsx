@@ -36,6 +36,10 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
 
   const router = useRouter();
 
+  const cardImage = `${image}.jpg`
+  console.log(`IMAGE:`)
+  console.log(image)
+
   const handleRecipeClick = (recipeId) => {
     router.push(`/recipes/${recipeId}`);
   }
@@ -49,10 +53,10 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
                 boxShadow: 10
               }, 
             }}
-              onClick={() => handleRecipeClick(id)}>
+        onClick={() => handleRecipeClick(id)}>
       <CardMedia
         sx={{ height: 150 }}
-        image="https://pixabay.com/get/g227b4122014848e19fd9e9bbb1eb3204cd5e112cba2ca935d2c145abbcfc3bec55efb02ca2e9489e93d2e201f62e89707f57cfb3ae294cf8df858030be013ba8689ae8774a5c3cc9eb6ba1bf8693f9f8_640.jpg"
+        image={image}
         title="placeholder"
       />
       <CardContent>
@@ -66,13 +70,13 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
           {duration} mins
         </Typography>
 
-          <IconButton aria-label="edit" sx={{color: theme.palette.primary.main}}>
-            <EditIcon />
-          </IconButton>
+        <IconButton aria-label="edit" sx={{color: theme.palette.primary.main}}>
+          <EditIcon />
+        </IconButton>
 
-          <IconButton aria-label="delete" sx={{color: theme.palette.primary.main}}>
-            <DeleteIcon />
-          </IconButton>
+        <IconButton aria-label="delete" sx={{color: theme.palette.primary.main}}>
+          <DeleteIcon />
+        </IconButton>
 
       </CardContent>
       </Card>
