@@ -2,35 +2,21 @@ import IngredientList from './ingredients/IngredientList'
 import StepList from './steps/StepList'
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+import PrintIcon from '@mui/icons-material/Print';
 import { Box } from '@mui/material';
-
-{/* drop down menu function */}
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
 
 export default function RecipeCard({ recipe }) {
 
@@ -39,15 +25,12 @@ export default function RecipeCard({ recipe }) {
   const router = useRouter();
 
   let website = new URL(recipe.url).hostname;
-  const [expanded, setExpanded] = React.useState(false);
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
+  
   const toIndex = () => {
     router.push(`/`);
   }
   
+{/*DELETE HELPER  */}
   const handleDeleteRecipe = async (id) => {
     const res = await fetch('/api/recipes/', {
       method: 'DELETE',
@@ -64,30 +47,31 @@ export default function RecipeCard({ recipe }) {
     toIndex();
   };
 
+  {/*IMAGE SIZING HELPER */}
   const removeImageDimensions = (url) => {
     let lastDash = url.lastIndexOf("-");
     let lastDot = url.lastIndexOf(".");
     return url.replace(url.substring(lastDash, lastDot), "");
   };
 
-
-  {/* Recipe card wrapped in div to center whole thing */}
+{/* FULL Recipe card wrapped in box to center whole thing */}
   return (
     <Box style={{ display:'flex', justifyContent:'center'}} pt={7}>
-   
+     
     <Card sx={{ maxWidth: 900 }}
           style={{backgroundColor: '#DCCCC0'}}>
-      
+
+{/* TITLE & BACK ARROW  */}      
       <CardHeader
       action={
           <IconButton aria-label="back to home" onClick={toIndex}>
             <ArrowBackIcon  />
           </IconButton>
         }
-
         title={recipe.title}
       />
-      
+
+{/* IMAGE  */}
       <CardMedia
         component="img"
         height="350"
@@ -95,6 +79,7 @@ export default function RecipeCard({ recipe }) {
         alt={recipe.title}
       />
 
+{/* DESCRIPTION  */}
       <CardContent>
 
         <Typography 
@@ -104,17 +89,19 @@ export default function RecipeCard({ recipe }) {
         </Typography>
 
       </CardContent>
-      <CardActions disableSpacing>
 
+      <CardActions disableSpacing>
   <CardContent>
 
+{/* SOURCE  */}
     <Typography>
     <IconButton aria-label="recipe source">
       <RestaurantIcon />
     </IconButton>
     <a style={{ color: '#542307'}} href={recipe.url}>{website}</a>
     </Typography>
-    
+
+{/* DURATION?  */}
     <Typography>
       {recipe.duration === undefined ?
         <IconButton aria-label="recipe duration">
@@ -128,32 +115,28 @@ export default function RecipeCard({ recipe }) {
 
   </CardContent>
 
+{/* LABELS  */}
               <Stack direction="row" spacing={1}>
                 {recipe.labels.map((label) => (
                   <Chip label={label} key={label} />
                 ))}
               </Stack>
 
+{/* PRINT */}
+              <IconButton aria-label="print Recipe Card" onClick={() => window.print()}>
+                <PrintIcon />
+              </IconButton>
+
+{/* DELETE */}
               <IconButton aria-label="delete from My List" onClick={() => handleDeleteRecipe(recipe.id)}>
                 <DeleteIcon />
               </IconButton>
 
-              <ExpandMore
-                expand={expanded}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-              >
-            <ExpandMoreIcon />
-          </ExpandMore>
         </CardActions>
-        <Collapse 
-          in={expanded}
-          timeout="auto"
-          unmountOnExit
-        >
 
+{/* INGREDIENTS */}
           <CardContent>
+
             <Typography paragraph variant="h4">
               Ingredients
             </Typography>
@@ -161,6 +144,7 @@ export default function RecipeCard({ recipe }) {
             <Typography paragraph>
               <IngredientList ingredients={recipe.ingredients}/>
             </Typography>
+{/* METHOD  */}
 
             <Typography paragraph variant="h4">
               Method
@@ -169,8 +153,9 @@ export default function RecipeCard({ recipe }) {
             <Typography paragraph>
               <StepList steps={recipe.instructions}/>
             </Typography>
+
           </CardContent>
-        </Collapse>
+
       </Card>
     </Box>
   );
