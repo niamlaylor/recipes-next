@@ -6,7 +6,8 @@ export default function IngredientList ({ ingredients = [] }) {
     return(
       <IngredientListItem
         key={index}
-        ingredient={ingredient}
+        // if a checkbox is used in the ingredient list, remove it
+        ingredient={ingredient.replace('▢', '')}
       />
     );
   });
