@@ -33,11 +33,9 @@ export default function RecipeCard({ recipe }) {
 
   let website = new URL(recipe.url).hostname;
   const [expanded, setExpanded] = React.useState(false);
-  console.log(recipe)
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
 
 {/* Recipe card wrapped in div to center whole thing */}
   return (

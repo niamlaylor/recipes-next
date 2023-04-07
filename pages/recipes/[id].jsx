@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import RecipeCard from "../../components/recipe-card/RecipeCard";
 import Header from '../../components/navigation/Header';
 import { PrismaClient } from '@prisma/client';
