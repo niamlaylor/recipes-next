@@ -1,12 +1,13 @@
 import IngredientListItem from "./IngredientListItem";
 
-export default function IngredientList ({ ingredients }) {
+export default function IngredientList ({ ingredients = [] }) {
 
   const ingredientListItems = ingredients.map((ingredient, index) => {
     return(
       <IngredientListItem
         key={index}
-        ingredient={ingredient}
+        // if a checkbox is used in the ingredient list, remove it
+        ingredient={ingredient.replace('▢', '')}
       />
     );
   });

@@ -36,9 +36,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
 
   const router = useRouter();
 
-  const cardImage = `${image}.jpg`
-  console.log(`IMAGE:`)
-  console.log(image)
+  const url = new URL(website).hostname;
 
   const handleRecipeClick = (recipeId) => {
     router.push(`/recipes/${recipeId}`);
@@ -64,10 +62,10 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
           {name}
         </Typography>
         <Typography variant="body2">
-          From {website}
+          From {url}
         </Typography>
         <Typography gutterBottom variant="body2" component="div">
-          {duration} mins
+          {duration !== 'undefined' ? `${duration} minutes` : ''}
         </Typography>
 
         <IconButton aria-label="edit" sx={{color: theme.palette.primary.main}}>
@@ -83,15 +81,3 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
     </ThemeProvider>
   );
 }
-
-{/* ORIGINAL CODE */}
-
-{/* <li className={styles.recipeListCard} onClick={() => handleRecipeClick(id)}>
-      <div className={styles.recipeTitleSource}>
-        <h3>{name}</h3>
-        <label>from {website}</label>
-        <label>{duration}m</label>
-        {<LabelList labels={labels}/>} THIS LINE WAS COMMENTED OUT
-        </div>
-        <img className={styles.recipeImage} src={image}></img>
-      </li> */}

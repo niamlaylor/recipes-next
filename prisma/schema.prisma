@@ -19,14 +19,15 @@ model recipe {
   img_url      String?   @db.VarChar
   labels       String[]
   created_at   DateTime? @db.Timestamptz(6)
+  description  String?   @db.VarChar
   user         user      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model user {
   id         Int      @id @unique @db.SmallInt
   name       String   @default("") @db.VarChar
-  email      String   @unique @default("NULL") @db.VarChar
-  password   String   @default("NULL") @db.VarChar
+  email      String   @unique @default("") @db.VarChar
+  password   String   @default("") @db.VarChar
   created_at DateTime @default(now()) @db.Timestamptz(6)
   recipe     recipe[]
 }
