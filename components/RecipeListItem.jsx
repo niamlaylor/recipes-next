@@ -1,4 +1,5 @@
-//import styles from '../styles/RecipeListItem.module.css';
+// components/RecipeListItem.jsx
+
 import LabelList from './LabelList';
 import { useRouter } from 'next/router';
 import EditIcon from '@mui/icons-material/Edit';
@@ -42,6 +43,21 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
     router.push(`/recipes/${recipeId}`);
   }
 
+  const handleDeleteRecipe = async (id) => {
+    const res = await fetch('/api/recipes/', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id })
+    });
+    if (res.ok) {
+      console.log('woo!')
+    } else {
+      console.log('oh no!')
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Card style={{backgroundColor: theme.palette.secondary.main}} 
@@ -73,7 +89,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
           <EditIcon />
         </IconButton>
 
-        <IconButton aria-label="delete" sx={{color: theme.palette.primary.main}}>
+        <IconButton aria-label="delete" sx={{color: theme.palette.primary.main}} onClick={() => handleDeleteRecipe(id)} >
           <DeleteIcon />
         </IconButton>
 
@@ -82,3 +98,4 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
     </ThemeProvider>
   );
 }
+

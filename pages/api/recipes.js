@@ -30,4 +30,21 @@ export default async function handler(req, res) {
       res.status(500).json({ message: 'Something went wrong' });
     };
   };
+
+  if (req.method === 'DELETE') {
+    const { id } = req.body;
+    try {
+      const deleteRecipe = await prisma.recipe.delete({
+        where: {
+          id: id
+        }
+      });
+      res.status(200).json(deleteRecipe);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error deleting recipe' });
+    }
+  } else {
+    res.status(400).json({ message: 'Invalid HTTP method' });
+  }
 };
