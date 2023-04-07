@@ -10,13 +10,12 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Typography from '@mui/material/Typography';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
@@ -71,17 +70,12 @@ export default function RecipeCard({ recipe }) {
           style={{backgroundColor: '#DCCCC0'}}>
       
       <CardHeader
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
         title={recipe.title}
       />
       
       <CardMedia
         component="img"
-        height="194"
+        height="250"
         image={recipe.img_url}
         alt={recipe.title}
       />
@@ -122,8 +116,7 @@ export default function RecipeCard({ recipe }) {
               <Stack direction="row" spacing={1}>
                 <Chip label="keto"  />
                 <Chip label="< 60 mins"  />
-                <Chip label="brunch"  />
-                <Chip label="gluten free"  />
+                <Chip label="weekend"  />
                 <Chip label="kid friendly"  />
               </Stack>
 
