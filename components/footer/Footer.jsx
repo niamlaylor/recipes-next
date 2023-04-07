@@ -27,7 +27,7 @@ const theme = createTheme({
 export default function Footer( ) {
     return (
       <footer>
-          <ThemeProvider>
+          <ThemeProvider theme={theme}>
               <Divider sx={{
                         mt: 5
                         }}>

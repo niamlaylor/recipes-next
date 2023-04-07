@@ -28,10 +28,10 @@ const theme = createTheme({
   }
 });
 
+
 export default function AddRecipeForm(props) {
 
   const [website, setWebsite] = useState(props.website || "");
-  const handleSubmit = event => event.preventDefault();
 
   const getRecipe = async (event) => {
     event.preventDefault();
@@ -48,7 +48,7 @@ export default function AddRecipeForm(props) {
     const recipeData = await fetch("/api/get-recipe/", fetchOptions).then(
       (res) => {
         res.json().then((recipeJson) => {
-          console.log(typeof recipeJson);
+          console.log('Recipe data:', recipeJson);
           axios.post('/api/recipes', recipeJson).then((response) => {
             console.log("Axios request successful");
             console.log(response);
@@ -63,60 +63,45 @@ export default function AddRecipeForm(props) {
   };
 
   return (
-          <ThemeProvider theme={theme}>
-                <Container component="main" maxWidth="lg">
-                  <Box
-                    sx={{
-                      marginTop: 6,
-                      marginBottom: 6,
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Typography component="h1" variant="h5">
-                      Paste a Recipe URL
-                    </Typography>
-                    <Box component="form" onSubmit={getRecipe} noValidate sx={{ mt: 1, minWidth: 500 }}>
-                      <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="url"
-                        label="Recipe URL"
-                        name="url"
-                        autoComplete="off"
-                        autoFocus
-                        value={website}
-                        onChange={event => setWebsite(event.target.value)}
-                      />
-                      <Button
-                        fullWidth
-                        type="submit"
-                        variant="contained"
-                        size="large"
-                        sx={{ mt: 3, mb: 2 }}
-                      >
-                        SUBMIT
-                      </Button>
-                    </Box>
-                  </Box>
-                </Container>
-              </ThemeProvider>
+    <ThemeProvider theme={theme}>
+    <Container component="main" maxWidth="lg">
+      <Box
+        sx={{
+          marginTop: 6,
+          marginBottom: 6,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography component="h1" variant="h5">
+          Paste a Recipe URL
+        </Typography>
+        <Box component="form" onSubmit={getRecipe} noValidate sx={{ mt: 1, minWidth: 500 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="url"
+            label="Recipe URL"
+            name="url"
+            autoComplete="off"
+            autoFocus
+            value={website}
+            onChange={event => setWebsite(event.target.value)}
+          />
+          <Button
+            fullWidth
+            type="submit"
+            variant="contained"
+            size="large"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            SUBMIT
+          </Button>
+        </Box>
+      </Box>
+    </Container>
+    </ThemeProvider>
   );
 };
-
-    {/* PREVIOUS STYLING: 
-    <section className={styles.formSection}>
-      <form className={styles.addRecipeForm} onSubmit={getRecipe} autoComplete="off">
-        <input
-          className ={styles.addRecipeInput}
-          name="url"
-          type="url"
-          placeholder="Paste a recipe URL"
-          value={website}
-          onChange={event => setWebsite(event.target.value)}
-        />
-         <button className={styles.addRecipeButton} type="submit">Submit</button>
-      </form>
-    </section>*/}

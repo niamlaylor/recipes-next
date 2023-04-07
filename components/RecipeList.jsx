@@ -6,8 +6,6 @@ import Grid from '@mui/material/Grid';
 
 export default function RecipeList({ recipes }) {
 
-  console.log(recipes)
-
   const recipeList = recipes.map(recipe => {
     return (
         
