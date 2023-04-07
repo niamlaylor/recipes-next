@@ -30,8 +30,8 @@ export default function Home({ recipes = [] } ) {
     <>
       <Header />
       <main className="mainList">
+        <AddRecipeForm /> 
         <RecipeList recipes={recipes}/>
-        <AddRecipeForm />
       </main>
     </>
   )
