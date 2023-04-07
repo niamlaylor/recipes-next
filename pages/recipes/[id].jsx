@@ -1,18 +1,37 @@
-'use client'
 import { useRouter } from 'next/router'
-import { mockRecipes } from "../index";
 import RecipeCard from "../../components/recipe-card/RecipeCard";
 import Header from '../../components/navigation/Header';
+import { PrismaClient } from '@prisma/client';
 
-export default function Recipe() {
+const prisma = new PrismaClient();
 
-  const router = useRouter();
-  const { id } = router.query;
+export async function getServerSideProps(context) {
+  const { id } = context.params;
 
-  const recipe = mockRecipes.find((recipe) => {
-    return recipe.id === Number(id)
+  const recipe = await prisma.recipe.findUnique({
+    where: { id: Number(id) },
   });
 
+  if (!recipe) {
+    return { notFound: true };
+  }
+
+  const recipeJSON = JSON.stringify(recipe, (key, value) => {
+    if (typeof value === "bigint") {
+      return value.toString();
+    }
+    return value;
+  });
+
+  return {
+    props: {
+      recipe: JSON.parse(recipeJSON),
+    },
+  };
+}
+
+
+export default function Recipe({ recipe = [] }) {
   if (!recipe) {
     return <div>Loading...</div>
   }
@@ -22,6 +41,5 @@ export default function Recipe() {
       <Header/>
       <RecipeCard recipe={recipe}/>
     </>
-  
   )
 };

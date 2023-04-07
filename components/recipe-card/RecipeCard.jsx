@@ -30,8 +30,10 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function RecipeCard({ recipe }) {
-  const [expanded, setExpanded] = React.useState(false);
 
+  let website = new URL(recipe.url).hostname;
+  const [expanded, setExpanded] = React.useState(false);
+  console.log(recipe)
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -51,14 +53,14 @@ export default function RecipeCard({ recipe }) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={recipe.name}
+        title={recipe.title}
       />
       
       <CardMedia
         component="img"
         height="194"
-        image="https://gifdb.com/images/high/anime-food-cooking-breakfast-3fpdmic4i3og5dxe.webp"
-        alt="anime food"
+        image={recipe.img_url}
+        alt={recipe.title}
       />
 
 {/* Recipe description */}      
@@ -67,7 +69,9 @@ export default function RecipeCard({ recipe }) {
         <Typography 
         variant="body1"
         color="text.secondary">
-        The Instant Pot® truly shines in this quick and simple dish. Chicken thighs are sautéed first and then cook alongside long-grain rice until moist and tender. The rice gets added flavor from the chicken and is perfectly done at the same time thanks to the ease of using the Instant Pot®. The best part of this simple dish? It's all ready to eat in under an hour!
+        **We currently don't have the description in our db but I'll add it** If you are looking for new, delicious ways to enjoy chicken breast, this seared chicken smothered in a creamy sauce is the recipe of your dreams. Not only is it bursting with incredible flavor, but it’s so quick and simple to make!
+
+        This creamy chicken breast recipe is also ideal for those who are looking for a low-carb meal and a keto-friendly diet recipe.
         </Typography>
 
       </CardContent>
@@ -76,21 +80,24 @@ export default function RecipeCard({ recipe }) {
 {/* Recipe source website */}
   <CardContent>
 
-        <Typography>
-        <IconButton aria-label="recipe source">
-          <RestaurantIcon />
-        </IconButton>
-        {recipe.website}
-        </Typography>
+    <Typography>
+    <IconButton aria-label="recipe source">
+      <RestaurantIcon />
+    </IconButton>
+    {website}
+    </Typography>
 
 {/* Recipe duration */}        
-        <Typography>
+    <Typography>
+      {recipe.duration === undefined ?
         <IconButton aria-label="recipe duration">
           <AccessTimeIcon />
         </IconButton>
-        {recipe.duration} mins
-        </Typography>
-
+        :
+        <span></span>
+      }
+      {recipe.duration === undefined ? `${recipe.duration} minutes` : ''}
+    </Typography>
   </CardContent>
 
 
@@ -104,7 +111,6 @@ export default function RecipeCard({ recipe }) {
         <IconButton aria-label="delete from My List">
           <DeleteIcon />
         </IconButton>
-
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -129,6 +135,7 @@ export default function RecipeCard({ recipe }) {
 
           <Typography paragraph>
           <IngredientList ingredients={recipe.ingredients}/>
+
           </Typography>
 
 {/* METHOD */}
@@ -138,7 +145,9 @@ export default function RecipeCard({ recipe }) {
           </Typography>
 
           <Typography paragraph>
-          <StepList steps={recipe.steps}/>
+          <StepList steps={recipe.instructions}/>
+
+
           </Typography>
 
         </CardContent>

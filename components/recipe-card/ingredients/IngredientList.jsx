@@ -1,6 +1,6 @@
 import IngredientListItem from "./IngredientListItem";
 
-export default function IngredientList ({ ingredients }) {
+export default function IngredientList ({ ingredients = [] }) {
 
   const ingredientListItems = ingredients.map((ingredient, index) => {
     return(
