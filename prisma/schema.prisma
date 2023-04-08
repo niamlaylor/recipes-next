@@ -11,15 +11,15 @@ model recipe {
   id           Int       @id @unique @default(autoincrement()) @db.SmallInt
   user_id      Int       @db.SmallInt
   title        String    @db.VarChar
-  rating       Decimal?  @db.Decimal
   duration     String?   @db.VarChar
   url          String    @db.VarChar
   ingredients  String[]
   instructions String[]
   img_url      String?   @db.VarChar
   labels       String[]
-  created_at   DateTime? @db.Timestamptz(6)
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
   description  String?   @db.VarChar
+  favorite     Boolean?  @default(false)
   user         user      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
