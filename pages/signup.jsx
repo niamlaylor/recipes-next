@@ -11,19 +11,29 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import Header from '../components/navigation/Header';
+import axios from 'axios';
 
 export default function SignUp( { theme }) {
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-      confirmPassword: data.get('confirmPassword'),
-    });
-  };
+    const { fullName, email, password, confirmPassword } = event.target;
+    const user = {
+      name: fullName.value,
+      email: email.value,
+      password: password.value,
+      confirmPassword: confirmPassword.value,
+    };
+    console.log(user)
+    try {
+      await axios.post('/api/users', user)
+      console.log('Sent POST request for this user: ', user)
+    } catch (error) {
+      console.log("Axios request error: ", error);
+    }
+  }
 
   return (
     <ThemeProvider theme={theme}>
