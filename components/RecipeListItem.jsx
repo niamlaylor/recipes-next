@@ -13,7 +13,8 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { IconButton } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
-import { red } from '@mui/material/colors';
+import Box from '@mui/material/Box';
+
 
 
 const theme = createTheme({
@@ -62,7 +63,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
     <ThemeProvider theme={theme}>
       <Card style={{backgroundColor: theme.palette.secondary.main}} 
         sx={{ maxWidth: 350, 
-              minHeight: 360,
+              minHeight: 400,
               maxHeight: 400, 
               ':hover': {
                 boxShadow: 10
@@ -74,7 +75,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
         image={image}
         title="placeholder"
       />
-      <CardContent>
+      <CardContent sx={{position: 'relative'}}>
         <Typography gutterBottom variant="h5" component="div">
           {name}
         </Typography>
@@ -84,14 +85,19 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
         <Typography gutterBottom variant="body2" component="div">
           {duration !== 'undefined' ? `${duration} minutes` : ''}
         </Typography>
-
-        <IconButton aria-label="favorite" onClick={handleFavClick} sx={{color: theme.palette.primary.main}}>
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="delete" sx={{color: theme.palette.primary.main}}>
-          <DeleteIcon />
-        </IconButton>
-
+        <Box sx={{
+                  flexDirection: 'row',
+                  position: 'absolute',
+                  mt: 5,
+                  mb: 0,
+                }}>
+          <IconButton aria-label="favorite" onClick={handleFavClick} sx={{color: theme.palette.primary.main}}>
+            <FavoriteIcon />
+          </IconButton>
+          <IconButton aria-label="delete" sx={{color: theme.palette.primary.main}}>
+            <DeleteIcon />
+          </IconButton>
+        </Box>
       </CardContent>
       </Card>
     </ThemeProvider>
