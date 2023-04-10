@@ -23,7 +23,7 @@ const theme = createTheme({
   }
 });
 
-export default function App({ session, Component, pageProps }) {
+export default function App({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
       <ThemeProvider theme={theme}>
