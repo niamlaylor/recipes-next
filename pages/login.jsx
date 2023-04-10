@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../components/navigation/Header';
+import GoogleButton from '../components/forms/GoogleButton';
 import { useSession, signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
@@ -98,15 +99,9 @@ export default function LogIn() {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                onClick={() => signIn()}
-                sx={{ mt: 3, mb: 2 }}
-              >
+              <GoogleButton>
                 Sign in with Google
-              </Button>
+              </GoogleButton>
               <Button
                 type="submit"
                 fullWidth
