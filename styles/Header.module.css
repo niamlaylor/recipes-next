@@ -7,16 +7,20 @@
 .headerNavList {
   display: flex;
   justify-content: space-between;
-  display: flex;
-  padding-inline-end: 40px
+  padding-inline-end: 100px;
+  padding-inline-start: 100px;
 }
 
 .headerNavList > li {
+  display: flex;
+  min-width: 180px;
   list-style: none;
-  padding-right: 10px;
   align-self: center;
 }
 
 .headerNavList li:last-child {
-  padding-right: 0px;
+  display: flex;
+  min-width: 210px;
+  justify-content: space-between;
+  align-self: right;
 }
