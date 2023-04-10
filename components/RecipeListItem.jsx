@@ -1,7 +1,8 @@
 //import styles from '../styles/RecipeListItem.module.css';
+import React from 'react';
 import LabelList from './LabelList';
 import { useRouter } from 'next/router';
-import EditIcon from '@mui/icons-material/Edit';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -12,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { IconButton } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
+import { red } from '@mui/material/colors';
+
 
 const theme = createTheme({
   palette: {
@@ -38,9 +41,22 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
 
   const url = new URL(website).hostname;
 
+  //Helper function to handle recipe click
   const handleRecipeClick = (recipeId) => {
     router.push(`/recipes/${recipeId}`);
   }
+
+  //Helper function to handle favorite icon click
+  //Changes the icon to red on click
+  //Not sure how to prevent the default click behaviour and keep the colour red after refresh
+    const [favClicked, setFavClicked] = React.useState(false);
+  
+    const handleFavClick = (e) => {
+      e.preventDefault();
+      e.target.style.color = "red";
+      setFavClicked(!favClicked);
+    };
+  
 
   return (
     <ThemeProvider theme={theme}>
@@ -69,10 +85,9 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
           {duration !== 'undefined' ? `${duration} minutes` : ''}
         </Typography>
 
-        <IconButton aria-label="edit" sx={{color: theme.palette.primary.main}}>
-          <EditIcon />
+        <IconButton aria-label="favorite" onClick={handleFavClick} sx={{color: theme.palette.primary.main}}>
+          <FavoriteIcon />
         </IconButton>
-
         <IconButton aria-label="delete" sx={{color: theme.palette.primary.main}}>
           <DeleteIcon />
         </IconButton>
