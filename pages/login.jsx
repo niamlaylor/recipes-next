@@ -105,17 +105,24 @@ export default function LogIn({ theme }) {
   } else {
     return (
       <ThemeProvider theme={theme}>
-        <Header onLoggedInPage={true} userLoggedIn={false} />
-        <div>You are already logged in!</div>
-        <Button
-          type="button"
-          fullWidth
-          variant="contained"
-          onClick={() => handleRedirect('/')}
-          sx={{ mt: 3, mb: 2 }}
-        >
-          Home
-        </Button>
+        <Header onLoggedInPage={true} userLoggedIn={false}/>
+        <Box sx={{
+            marginTop: 6,
+            marginBottom: 6,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}>
+          <Typography variant="h6">You are already logged in!</Typography>
+          <Button
+            type="button"
+            variant="contained"
+            onClick={() => handleRedirect('/')}
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Home
+          </Button>
+        </Box>
       </ThemeProvider>
     );
   }
