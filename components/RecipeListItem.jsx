@@ -1,5 +1,5 @@
 //import styles from '../styles/RecipeListItem.module.css';
-import React from 'react';
+import {useState, useEffect} from 'react';
 import LabelList from './LabelList';
 import { useRouter } from 'next/router';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -65,7 +65,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
     toIndex();
   };
   
-  const [favClicked, setFavClicked] = React.useState(false);
+  const [favClicked, setFavClicked] = useState(false);
 
   const handleFavClick = async (e) => {
     e.preventDefault();
@@ -86,6 +86,28 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
       console.error('Failed to update favorite status.');
     }
   };
+
+  useEffect(() => {
+    const fetchFavorite = async () => {
+      try {
+        const response = await fetch(`/api/recipes?id=${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (response.ok) {
+          const recipe = await response.json();
+          setFavClicked(recipe.favorite);
+        } else {
+          throw new Error('Failed to fetch favorite recipe');
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchFavorite();
+  }, [id]);
 
     const truncateName = name.length > 50 ? name.substring(0, 50) + "..." : name;
 

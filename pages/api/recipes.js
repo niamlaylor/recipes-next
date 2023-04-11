@@ -62,7 +62,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ message: 'Error updating recipe' });
     }
   } 
-  
+
   else {
     return res.status(400).json({ message: 'Invalid HTTP method' });
   }
