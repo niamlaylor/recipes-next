@@ -1,4 +1,3 @@
-
 //import styles from '../styles/RecipeListItem.module.css';
 import React from 'react';
 import LabelList from './LabelList';
@@ -48,7 +47,6 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
     router.push(`/recipes/${recipeId}`);
   }
 
-
   const toIndex = () => {
     router.push(`/`);
   }
@@ -80,55 +78,56 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
       setFavClicked(!favClicked);
     };
 
-  return (
-    <ThemeProvider theme={theme}>
-      <Card style={{backgroundColor: theme.palette.secondary.main}} 
-        sx={{ width: 300, 
-              height: 400,
-              ':hover': {
-                boxShadow: 10
-              },
-            }}
+    const truncateName = name.length > 50 ? name.substring(0, 50) + "..." : name;
+
+    return (
+      <ThemeProvider theme={theme}>
+        <Card 
+          style={{backgroundColor: theme.palette.secondary.main}} 
+          sx={{ 
+            width: 300, 
+            height: 400,
+            ':hover': {
+              boxShadow: 10
+            },
+          }}
         >
-      <div>
-        
-      </div>
-      <CardMedia
-        sx={{ height: 150 }}
-        image={image}
-        title="placeholder"
-      />
+          <CardMedia
+            onClick={() => handleRecipeClick(id)}
+            sx={{ height: 150 }}
+            image={image}
+            title="placeholder"
+          />
 
-      <CardContent sx={{position: 'relative'}} onClick={() => handleRecipeClick(id)}>
-        <Typography gutterBottom variant="h5" component="div">
-          {name}
-        </Typography>
-        <Typography variant="body2">
-          From {url}
-        </Typography>
-        <Typography gutterBottom variant="body2" component="div">
-          {duration !== 'undefined' ? `${duration} minutes` : ''}
-        </Typography>
+          <CardContent sx={{position: 'relative'}} >
+            <div onClick={() => handleRecipeClick(id)}>
+              <Typography gutterBottom variant="h5" component="div">
+                {truncateName}
+              </Typography>
+              <Typography variant="body2">
+                From {url}
+              </Typography>
+              <Typography gutterBottom variant="body2" component="div">
+                {duration !== 'undefined' ? `${duration} minutes` : ''}
+              </Typography>
+            </div>
+            <Box sx={{
+              flexDirection: 'row',
+              position: 'absolute',
+              mt: 5,
+              mb: 0, }}
+            >
 
-      </CardContent>
-      
-        <Box sx={{
-            flexDirection: 'row',
-            position: 'absolute',
-            mt: 5,
-            mb: 0,
-          }}>
+            <IconButton aria-label="favorite" onClick={handleFavClick} sx={{color: theme.palette.primary.main}}>
+              <FavoriteIcon />
+            </IconButton>
 
-        <IconButton aria-label="favorite" onClick={handleFavClick} sx={{color: theme.palette.primary.main}}>
-          <FavoriteIcon />
-        </IconButton>
+            <IconButton aria-label="delete" sx={{color: theme.palette.primary.main}} onClick={() => handleDeleteRecipe(id)} >
+              <DeleteIcon />
+            </IconButton>
 
-        <IconButton aria-label="delete" sx={{color: theme.palette.primary.main}} onClick={() => handleDeleteRecipe(id)} >
-          <DeleteIcon />
-        </IconButton>
-
-        </Box>
-
+          </Box>
+        </CardContent>
       </Card>
     </ThemeProvider>
   );
