@@ -17,6 +17,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 
 {/* drop down menu function */}
 const ExpandMore = styled((props) => {
@@ -29,6 +31,7 @@ const ExpandMore = styled((props) => {
     duration: theme.transitions.duration.shortest,
   }),
 }));
+
 
 export default function RecipeCard({ recipe }) {
 
@@ -117,19 +120,25 @@ export default function RecipeCard({ recipe }) {
       }
       {recipe.duration === undefined ? `${recipe.duration} minutes` : ''}
     </Typography>
+
   </CardContent>
 
+  <Stack direction="row" spacing={1}>
+      <Chip label="keto"  />
+      <Chip label="< 60 mins"  />
+      <Chip label="brunch"  />
+      <Chip label="gluten free"  />
+      <Chip label="kid friendly"  />
+    </Stack>
 
-{/* SAVE to My List */}
 
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
+
 
 {/* DELETE from My List */}
         <IconButton aria-label="delete from My List" onClick={() => handleDeleteRecipe(recipe.id)}>
           <DeleteIcon />
         </IconButton>
+
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -143,6 +152,7 @@ export default function RecipeCard({ recipe }) {
           in={expanded}
           timeout="auto"
           unmountOnExit>
+
             
 {/* INGREDIENTS */}        
         <CardContent>

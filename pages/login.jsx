@@ -11,32 +11,14 @@ import Box from '@mui/material/Box';
 // import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import Header from '../components/navigation/Header';
-import { useSession, signIn } from 'next-auth/react';
+import AuthButton from '../components/forms/AuthButton';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
-const theme = createTheme({
-  palette: {
-    //Main colour, dark brown
-    primary: {
-      main: '#542307'
-    },
-    //Secondary colour, light brown
-    secondary: {
-      main: '#DCCCC0'
-    }
-  },
-  //Nunito Sans font
-  typography: {
-    fontFamily: 'Nunito Sans',
-    fontWeightRegular: 400,
-    fontWeightBold: 700
-  }
-});
 
-
-export default function LogIn() {
+export default function LogIn({ theme }) {
 
   const { data: session } = useSession();
   const router = useRouter();
@@ -98,15 +80,10 @@ export default function LogIn() {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
-              <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                onClick={() => signIn()}
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign in with Google
-              </Button>
+
+              <AuthButton authProvider={'google'} />
+              <AuthButton authProvider={'github'} />
+
               <Button
                 type="submit"
                 fullWidth
@@ -130,17 +107,26 @@ export default function LogIn() {
   } else {
     return (
       <ThemeProvider theme={theme}>
-        <Header onLoggedInPage={true} userLoggedIn={false} />
-        <div>You are already logged in!</div>
-        <Button
-          type="button"
-          fullWidth
-          variant="contained"
-          onClick={() => handleRedirect('/')}
-          sx={{ mt: 3, mb: 2 }}
-        >
-          Home
-        </Button>
+
+        <Header onLoggedInPage={true} userLoggedIn={false}/>
+        <Box sx={{
+            marginTop: 6,
+            marginBottom: 6,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}>
+          <Typography variant="h6">You are already logged in!</Typography>
+          <Button
+            type="button"
+            variant="contained"
+            onClick={() => handleRedirect('/')}
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Home
+          </Button>
+        </Box>
+
       </ThemeProvider>
     );
   }

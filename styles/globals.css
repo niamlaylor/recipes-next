@@ -26,3 +26,61 @@ body {
 #sifterLogo > a > img {
   width: 20%;
 }
+
+.googleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%
+}
+
+.googleBtn:hover {
+  background-color: #eee;
+}
+
+.googleBtn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.3);
+}
+
+.googleBtn span {
+  margin-left: 10px;
+}
+
+.githubBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%
+}
+
+.githubBtn > img {
+  margin-right: 15px;
+}
+
+.githubBtn:hover {
+  background-color: #24292e;
+}
+
+.githubBtn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(16, 122, 204, 0.3);
+}

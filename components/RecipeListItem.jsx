@@ -1,8 +1,9 @@
-// components/RecipeListItem.jsx
 
+//import styles from '../styles/RecipeListItem.module.css';
+import React from 'react';
 import LabelList from './LabelList';
 import { useRouter } from 'next/router';
-import EditIcon from '@mui/icons-material/Edit';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -13,6 +14,9 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { IconButton } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
+import Box from '@mui/material/Box';
+
+
 
 const theme = createTheme({
   palette: {
@@ -39,9 +43,11 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
 
   const url = new URL(website).hostname;
 
+  //Helper function to handle recipe click
   const handleRecipeClick = (recipeId) => {
     router.push(`/recipes/${recipeId}`);
   }
+
 
   const toIndex = () => {
     router.push(`/`);
@@ -62,16 +68,26 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
     }
     toIndex();
   };
+  
+  //Helper function to handle favorite icon click
+  //Changes the icon to red on click
+  //Not sure how to prevent the default click behaviour and keep the colour red after refresh
+    const [favClicked, setFavClicked] = React.useState(false);
+  
+    const handleFavClick = (e) => {
+      e.preventDefault();
+      e.target.style.color = "red";
+      setFavClicked(!favClicked);
+    };
 
   return (
     <ThemeProvider theme={theme}>
       <Card style={{backgroundColor: theme.palette.secondary.main}} 
-        sx={{ maxWidth: 350, 
-              minHeight: 360,
-              maxHeight: 400, 
+        sx={{ width: 300, 
+              height: 400,
               ':hover': {
                 boxShadow: 10
-              }, 
+              },
             }}
         >
       <div>
@@ -82,7 +98,8 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
         image={image}
         title="placeholder"
       />
-      <CardContent onClick={() => handleRecipeClick(id)}>
+
+      <CardContent sx={{position: 'relative'}} onClick={() => handleRecipeClick(id)}>
         <Typography gutterBottom variant="h5" component="div">
           {name}
         </Typography>
@@ -94,14 +111,23 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
         </Typography>
 
       </CardContent>
+      
+        <Box sx={{
+            flexDirection: 'row',
+            position: 'absolute',
+            mt: 5,
+            mb: 0,
+          }}>
 
-        <IconButton aria-label="edit" sx={{color: theme.palette.primary.main}}>
-          <EditIcon />
+        <IconButton aria-label="favorite" onClick={handleFavClick} sx={{color: theme.palette.primary.main}}>
+          <FavoriteIcon />
         </IconButton>
 
         <IconButton aria-label="delete" sx={{color: theme.palette.primary.main}} onClick={() => handleDeleteRecipe(id)} >
           <DeleteIcon />
         </IconButton>
+
+        </Box>
 
       </Card>
     </ThemeProvider>

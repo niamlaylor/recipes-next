@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 export default function RecipeList({ recipes }) {
 
   const recipeList = recipes.map((recipe) => (
-    <Grid item xs={6} md={3} key={recipe.id}>
+    <Grid item xs="auto" key={recipe.id}>
       <RecipeListItem
         id={recipe.id}
         name={recipe.title}
