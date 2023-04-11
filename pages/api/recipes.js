@@ -63,6 +63,20 @@ export default async function handler(req, res) {
     }
   } 
 
+  if (req.method === 'GET') {
+    try {
+      const recipe = await prisma.recipe.findUnique({
+        where: {
+          id: Number(req.query.id)
+        }
+      });
+      return res.status(200).json(recipe);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Error getting recipe details.' });
+    }
+  } 
+  
   else {
     return res.status(400).json({ message: 'Invalid HTTP method' });
   }
