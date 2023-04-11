@@ -78,6 +78,8 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
       setFavClicked(!favClicked);
     };
 
+    const truncateName = name.length > 50 ? name.substring(0, 50) + "..." : name;
+
     return (
       <ThemeProvider theme={theme}>
         <Card 
