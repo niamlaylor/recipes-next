@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
+  
   if (req.method === 'POST') {
     try {
       console.log(`Recipe data:`, req.body)
@@ -44,7 +45,6 @@ export default async function handler(req, res) {
       console.error(error);
       return res.status(500).json({ message: 'Error deleting recipe' });
     }
-  } else {
-    return res.status(400).json({ message: 'Invalid HTTP method' });
-  }
+  } 
+
 };

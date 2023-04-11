@@ -15,8 +15,6 @@ import { IconButton } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import Box from '@mui/material/Box';
 
-
-
 const theme = createTheme({
   palette: {
     //Main colour, dark brown
@@ -70,13 +68,27 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
   //Helper function to handle favorite icon click
   //Changes the icon to red on click
   //Not sure how to prevent the default click behaviour and keep the colour red after refresh
-    const [favClicked, setFavClicked] = React.useState(false);
-  
-    const handleFavClick = (e) => {
-      e.preventDefault();
-      e.target.style.color = "red";
-      setFavClicked(!favClicked);
-    };
+  const [favClicked, setFavClicked] = React.useState(false);
+
+  const handleFavClick = async (e) => {
+    e.preventDefault();
+    const response = await fetch('/api/recipes', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id,
+        favorite: !favClicked,
+      }),
+    });
+    if (response.ok) {
+      const updatedRecipe = await response.json();
+      setFavClicked(updatedRecipe.favorite);
+    } else {
+      console.error('Failed to update favorite status.');
+    }
+  };
 
     const truncateName = name.length > 50 ? name.substring(0, 50) + "..." : name;
 
@@ -118,7 +130,13 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
               mb: 0, }}
             >
 
-            <IconButton aria-label="favorite" onClick={handleFavClick} sx={{color: theme.palette.primary.main}}>
+            <IconButton
+              aria-label="favorite"
+              onClick={handleFavClick}
+              sx={{
+                color: favClicked ? 'red' : theme.palette.primary.main,
+              }}
+            >
               <FavoriteIcon />
             </IconButton>
 
