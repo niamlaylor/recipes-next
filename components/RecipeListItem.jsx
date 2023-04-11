@@ -1,5 +1,5 @@
 //import styles from '../styles/RecipeListItem.module.css';
-import React from 'react';
+import {useState, useEffect} from 'react';
 import LabelList from './LabelList';
 import { useRouter } from 'next/router';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -14,8 +14,6 @@ import TextField from '@mui/material/TextField';
 import { IconButton } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import Box from '@mui/material/Box';
-
-
 
 const theme = createTheme({
   palette: {
@@ -67,16 +65,49 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
     toIndex();
   };
   
-  //Helper function to handle favorite icon click
-  //Changes the icon to red on click
-  //Not sure how to prevent the default click behaviour and keep the colour red after refresh
-    const [favClicked, setFavClicked] = React.useState(false);
-  
-    const handleFavClick = (e) => {
-      e.preventDefault();
-      e.target.style.color = "red";
-      setFavClicked(!favClicked);
+  const [favClicked, setFavClicked] = useState(false);
+
+  const handleFavClick = async (e) => {
+    e.preventDefault();
+    const response = await fetch('/api/recipes', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id,
+        favorite: !favClicked,
+      }),
+    });
+    if (response.ok) {
+      const updatedRecipe = await response.json();
+      setFavClicked(updatedRecipe.favorite);
+    } else {
+      console.error('Failed to update favorite status.');
+    }
+  };
+
+  useEffect(() => {
+    const fetchFavorite = async () => {
+      try {
+        const response = await fetch(`/api/recipes?id=${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (response.ok) {
+          const recipe = await response.json();
+          setFavClicked(recipe.favorite);
+        } else {
+          throw new Error('Failed to fetch favorite recipe');
+        }
+      } catch (error) {
+        console.error(error);
+      }
     };
+    fetchFavorite();
+  }, [id]);
 
     const truncateName = name.length > 50 ? name.substring(0, 50) + "..." : name;
 
@@ -118,7 +149,13 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
               mb: 0, }}
             >
 
-            <IconButton aria-label="favorite" onClick={handleFavClick} sx={{color: theme.palette.primary.main}}>
+            <IconButton
+              aria-label="favorite"
+              onClick={handleFavClick}
+              sx={{
+                color: favClicked ? 'red' : theme.palette.primary.main,
+              }}
+            >
               <FavoriteIcon />
             </IconButton>
 
