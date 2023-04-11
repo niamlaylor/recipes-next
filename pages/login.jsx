@@ -11,10 +11,10 @@ import Box from '@mui/material/Box';
 // import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import Header from '../components/navigation/Header';
-import GoogleButton from '../components/forms/GoogleButton';
-import { useSession, signIn } from 'next-auth/react';
+import AuthButton from '../components/forms/AuthButton';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
 
@@ -80,9 +80,8 @@ export default function LogIn({ theme }) {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
-              <GoogleButton>
-                Sign in with Google
-              </GoogleButton>
+              <AuthButton authProvider={'google'} />
+              <AuthButton authProvider={'github'} />
               <Button
                 type="submit"
                 fullWidth
