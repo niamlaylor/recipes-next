@@ -62,12 +62,11 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
   return (
     <ThemeProvider theme={theme}>
       <Card style={{backgroundColor: theme.palette.secondary.main}} 
-        sx={{ maxWidth: 350, 
-              minHeight: 400,
-              maxHeight: 400, 
+        sx={{ width: 300, 
+              height: 400,
               ':hover': {
                 boxShadow: 10
-              }, 
+              },
             }}
         onClick={() => handleRecipeClick(id)}>
       <CardMedia
