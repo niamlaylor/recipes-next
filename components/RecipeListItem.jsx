@@ -65,9 +65,6 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
     toIndex();
   };
   
-  //Helper function to handle favorite icon click
-  //Changes the icon to red on click
-  //Not sure how to prevent the default click behaviour and keep the colour red after refresh
   const [favClicked, setFavClicked] = React.useState(false);
 
   const handleFavClick = async (e) => {
