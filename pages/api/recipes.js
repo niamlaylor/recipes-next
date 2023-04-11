@@ -46,5 +46,28 @@ export default async function handler(req, res) {
       return res.status(500).json({ message: 'Error deleting recipe' });
     }
   } 
+  
+  if (req.method === 'PUT') {
+    console.log(`Favorite:`)
+    console.log(req.body)
+    try {
+      const recipe = await prisma.recipe.update({
+        where: {
+          id: req.body.id
+        },
+        data: {
+          favorite: req.body.favorite
+        }
+      });
+      return res.status(200).json(recipe);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Error updating recipe' });
+    }
+  } 
+  
+  else {
+    return res.status(400).json({ message: 'Invalid HTTP method' });
+  }
 
 };
