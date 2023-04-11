@@ -43,9 +43,9 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
     router.push(`/recipes/${recipeId}`);
   }
 
-  // const toIndex = () => {
-  //   router.push(`/`);
-  // }
+  const toIndex = () => {
+    router.push(`/`);
+  }
 
   const handleDeleteRecipe = async (id) => {
     const res = await fetch('/api/recipes/', {

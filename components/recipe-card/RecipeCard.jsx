@@ -17,7 +17,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import RecipeListItem from '../RecipeListItem';
 
 {/* drop down menu function */}
 const ExpandMore = styled((props) => {
@@ -58,7 +57,7 @@ export default function RecipeCard({ recipe }) {
     } else {
       console.log('oh no!')
     }
-    window.location.reload(false);
+    toIndex();
   };
 
 {/* Recipe card wrapped in div to center whole thing */}
