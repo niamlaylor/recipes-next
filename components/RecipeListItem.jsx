@@ -11,7 +11,7 @@ import CardContent from '@mui/material/CardContent';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { IconButton } from '@mui/material';
+import { autocompleteClasses, IconButton } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -121,7 +121,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
           style={{backgroundColor: theme.palette.secondary.main}} 
           sx={{ 
             width: 300, 
-            height: 400,
+            height: 350,
             display: "flex",
             flexDirection: "column",
             ':hover': {
@@ -136,9 +136,24 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
             title="placeholder"
           />
 
-          <CardContent>
+          <CardContent disableSpacing
+            sx={{
+              position: "relative",
+              width: '90%', 
+              alignSelf: 'flex-start',
+              height: 100,
+              display: "inline",
+              flexDirection: "column",
+              
+            }}>
             <div onClick={() => handleRecipeClick(id)}>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h6" component="div" 
+                sx={{ 
+                  fontWeight: 700,
+                  lineHeight: '28px',
+                  display: "inline",
+                  flexDirection: "column"              
+                }}>
                 {truncateName}
               </Typography>
               <Typography variant="body2">
@@ -148,9 +163,12 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
                 {duration !== 'undefined' ? `${duration} minutes` : ''}
               </Typography>
             </div>
-            <CardActions disableSpacing sx={{
-              mt: 8,
-              mb: 0
+            <CardActions disableSpacing
+              sx={{
+                width: 300,
+                ml: -2,
+                mt: 5,
+                mb: 0,
               }}
             >
 
