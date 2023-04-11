@@ -32,7 +32,6 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-
 export default function RecipeCard({ recipe }) {
 
   const router = useRouter();
@@ -63,7 +62,7 @@ export default function RecipeCard({ recipe }) {
     toIndex();
   };
 
-{/* Recipe card wrapped in div to center whole thing */}
+  {/* Recipe card wrapped in div to center whole thing */}
   return (
     <div 
     style={{ display:'flex', justifyContent:'center' }}>
@@ -87,7 +86,6 @@ export default function RecipeCard({ recipe }) {
         alt={recipe.title}
       />
 
-{/* Recipe description */}      
       <CardContent>
 
         <Typography 
@@ -99,7 +97,6 @@ export default function RecipeCard({ recipe }) {
       </CardContent>
       <CardActions disableSpacing>
 
-{/* Recipe source website */}
   <CardContent>
 
     <Typography>
@@ -108,8 +105,7 @@ export default function RecipeCard({ recipe }) {
     </IconButton>
     {website}
     </Typography>
-
-{/* Recipe duration */}        
+    
     <Typography>
       {recipe.duration === undefined ?
         <IconButton aria-label="recipe duration">
@@ -123,65 +119,52 @@ export default function RecipeCard({ recipe }) {
 
   </CardContent>
 
-  <Stack direction="row" spacing={1}>
-      <Chip label="keto"  />
-      <Chip label="< 60 mins"  />
-      <Chip label="brunch"  />
-      <Chip label="gluten free"  />
-      <Chip label="kid friendly"  />
-    </Stack>
+              <Stack direction="row" spacing={1}>
+                <Chip label="keto"  />
+                <Chip label="< 60 mins"  />
+                <Chip label="brunch"  />
+                <Chip label="gluten free"  />
+                <Chip label="kid friendly"  />
+              </Stack>
 
+              <IconButton aria-label="delete from My List" onClick={() => handleDeleteRecipe(recipe.id)}>
+                <DeleteIcon />
+              </IconButton>
 
-
-
-{/* DELETE from My List */}
-        <IconButton aria-label="delete from My List" onClick={() => handleDeleteRecipe(recipe.id)}>
-          <DeleteIcon />
-        </IconButton>
-
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-      </CardActions>
-      <Collapse 
+              <ExpandMore
+                expand={expanded}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more"
+              >
+            <ExpandMoreIcon />
+          </ExpandMore>
+        </CardActions>
+        <Collapse 
           in={expanded}
           timeout="auto"
-          unmountOnExit>
+          unmountOnExit
+        >
 
-            
-{/* INGREDIENTS */}        
-        <CardContent>
+          <CardContent>
+            <Typography paragraph variant="h4">
+              Ingredients
+            </Typography>
 
-          <Typography paragraph 
-                      variant="h4">
-            Ingredients
-          </Typography>
+            <Typography paragraph>
+              <IngredientList ingredients={recipe.ingredients}/>
+            </Typography>
 
-          <Typography paragraph>
-          <IngredientList ingredients={recipe.ingredients}/>
+            <Typography paragraph variant="h4">
+              Method
+            </Typography>
 
-          </Typography>
-
-{/* METHOD */}
-          <Typography paragraph
-                      variant="h4">
-            Method
-          </Typography>
-
-          <Typography paragraph>
-          <StepList steps={recipe.instructions}/>
-
-
-          </Typography>
-
-        </CardContent>
-      </Collapse>
-    </Card>
+            <Typography paragraph>
+              <StepList steps={recipe.instructions}/>
+            </Typography>
+          </CardContent>
+        </Collapse>
+      </Card>
     </div>
   );
 }
