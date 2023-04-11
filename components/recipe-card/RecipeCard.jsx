@@ -1,5 +1,6 @@
 import IngredientList from './ingredients/IngredientList'
 import StepList from './steps/StepList'
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -16,6 +17,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import RecipeListItem from '../RecipeListItem';
 
 {/* drop down menu function */}
 const ExpandMore = styled((props) => {
@@ -31,10 +33,32 @@ const ExpandMore = styled((props) => {
 
 export default function RecipeCard({ recipe }) {
 
+  const router = useRouter();
+
   let website = new URL(recipe.url).hostname;
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+
+  const toIndex = () => {
+    router.push(`/`);
+  }
+  
+  const handleDeleteRecipe = async (id) => {
+    const res = await fetch('/api/recipes/', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id })
+    });
+    if (res.ok) {
+      console.log('woo!')
+    } else {
+      console.log('oh no!')
+    }
+    window.location.reload(false);
   };
 
 {/* Recipe card wrapped in div to center whole thing */}
@@ -104,7 +128,7 @@ export default function RecipeCard({ recipe }) {
         </IconButton>
 
 {/* DELETE from My List */}
-        <IconButton aria-label="delete from My List">
+        <IconButton aria-label="delete from My List" onClick={() => handleDeleteRecipe(recipe.id)}>
           <DeleteIcon />
         </IconButton>
         <ExpandMore

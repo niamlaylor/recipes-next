@@ -43,6 +43,10 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
     router.push(`/recipes/${recipeId}`);
   }
 
+  // const toIndex = () => {
+  //   router.push(`/`);
+  // }
+
   const handleDeleteRecipe = async (id) => {
     const res = await fetch('/api/recipes/', {
       method: 'DELETE',
@@ -56,6 +60,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
     } else {
       console.log('oh no!')
     }
+    toIndex();
   };
 
   return (
@@ -68,13 +73,16 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
                 boxShadow: 10
               }, 
             }}
-        onClick={() => handleRecipeClick(id)}>
+        >
+      <div>
+        
+      </div>
       <CardMedia
         sx={{ height: 150 }}
         image={image}
         title="placeholder"
       />
-      <CardContent>
+      <CardContent onClick={() => handleRecipeClick(id)}>
         <Typography gutterBottom variant="h5" component="div">
           {name}
         </Typography>
@@ -85,6 +93,8 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
           {duration !== 'undefined' ? `${duration} minutes` : ''}
         </Typography>
 
+      </CardContent>
+
         <IconButton aria-label="edit" sx={{color: theme.palette.primary.main}}>
           <EditIcon />
         </IconButton>
@@ -93,7 +103,6 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
           <DeleteIcon />
         </IconButton>
 
-      </CardContent>
       </Card>
     </ThemeProvider>
   );
