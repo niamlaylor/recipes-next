@@ -122,6 +122,8 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
           sx={{ 
             width: 300, 
             height: 400,
+            display: "flex",
+            flexDirection: "column",
             ':hover': {
               boxShadow: 10
             },
@@ -134,7 +136,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
             title="placeholder"
           />
 
-          <CardContent sx={{position: 'relative'}} >
+          <CardContent>
             <div onClick={() => handleRecipeClick(id)}>
               <Typography gutterBottom variant="h5" component="div">
                 {truncateName}
@@ -146,28 +148,33 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
                 {duration !== 'undefined' ? `${duration} minutes` : ''}
               </Typography>
             </div>
-            <Box sx={{
-              flexDirection: 'row',
-              position: 'absolute',
-              mt: 5,
-              mb: 0, }}
+            <CardActions disableSpacing sx={{
+              mt: 8,
+              mb: 0
+              }}
             >
 
-            <IconButton
+            <IconButton disableSpacing
               aria-label="favorite"
               onClick={handleFavClick}
               sx={{
+                flex: "none",
                 color: favClicked ? 'red' : theme.palette.primary.main,
               }}
             >
               <FavoriteIcon />
             </IconButton>
 
-            <IconButton aria-label="delete" sx={{color: theme.palette.primary.main}} onClick={() => handleDeleteRecipe(id)} >
+            <IconButton disableSpacing aria-label="delete" 
+              sx={{
+              flex: "none",
+              color: theme.palette.primary.main,
+              }} 
+              onClick={() => handleDeleteRecipe(id)} >
               <DeleteIcon />
             </IconButton>
 
-          </Box>
+          </CardActions>
         </CardContent>
       </Card>
     </ThemeProvider>
