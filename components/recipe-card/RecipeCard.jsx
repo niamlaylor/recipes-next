@@ -12,11 +12,10 @@ import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
@@ -71,11 +70,12 @@ export default function RecipeCard({ recipe }) {
           style={{backgroundColor: '#DCCCC0'}}>
       
       <CardHeader
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
+      action={
+          <IconButton aria-label="back to home" onClick={toIndex}>
+            <ArrowBackIcon  />
           </IconButton>
         }
+
         title={recipe.title}
       />
       
