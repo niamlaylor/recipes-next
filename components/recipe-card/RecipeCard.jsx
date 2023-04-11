@@ -103,7 +103,7 @@ export default function RecipeCard({ recipe }) {
     <IconButton aria-label="recipe source">
       <RestaurantIcon />
     </IconButton>
-    {website}
+    <a href={recipe.url}>{website}</a>
     </Typography>
     
     <Typography>
