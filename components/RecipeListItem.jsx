@@ -1,3 +1,4 @@
+
 //import styles from '../styles/RecipeListItem.module.css';
 import React from 'react';
 import LabelList from './LabelList';
@@ -47,6 +48,27 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
     router.push(`/recipes/${recipeId}`);
   }
 
+
+  const toIndex = () => {
+    router.push(`/`);
+  }
+
+  const handleDeleteRecipe = async (id) => {
+    const res = await fetch('/api/recipes/', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id })
+    });
+    if (res.ok) {
+      console.log('woo!')
+    } else {
+      console.log('oh no!')
+    }
+    toIndex();
+  };
+  
   //Helper function to handle favorite icon click
   //Changes the icon to red on click
   //Not sure how to prevent the default click behaviour and keep the colour red after refresh
@@ -57,7 +79,6 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
       e.target.style.color = "red";
       setFavClicked(!favClicked);
     };
-  
 
   return (
     <ThemeProvider theme={theme}>
@@ -68,13 +89,17 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
                 boxShadow: 10
               },
             }}
-        onClick={() => handleRecipeClick(id)}>
+        >
+      <div>
+        
+      </div>
       <CardMedia
         sx={{ height: 150 }}
         image={image}
         title="placeholder"
       />
-      <CardContent sx={{position: 'relative'}}>
+
+      <CardContent sx={{position: 'relative'}} onClick={() => handleRecipeClick(id)}>
         <Typography gutterBottom variant="h5" component="div">
           {name}
         </Typography>
@@ -84,21 +109,28 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
         <Typography gutterBottom variant="body2" component="div">
           {duration !== 'undefined' ? `${duration} minutes` : ''}
         </Typography>
-        <Box sx={{
-                  flexDirection: 'row',
-                  position: 'absolute',
-                  mt: 5,
-                  mb: 0,
-                }}>
-          <IconButton aria-label="favorite" onClick={handleFavClick} sx={{color: theme.palette.primary.main}}>
-            <FavoriteIcon />
-          </IconButton>
-          <IconButton aria-label="delete" sx={{color: theme.palette.primary.main}}>
-            <DeleteIcon />
-          </IconButton>
-        </Box>
+
       </CardContent>
+      
+        <Box sx={{
+            flexDirection: 'row',
+            position: 'absolute',
+            mt: 5,
+            mb: 0,
+          }}>
+
+        <IconButton aria-label="favorite" onClick={handleFavClick} sx={{color: theme.palette.primary.main}}>
+          <FavoriteIcon />
+        </IconButton>
+
+        <IconButton aria-label="delete" sx={{color: theme.palette.primary.main}} onClick={() => handleDeleteRecipe(id)} >
+          <DeleteIcon />
+        </IconButton>
+
+        </Box>
+
       </Card>
     </ThemeProvider>
   );
 }
+

@@ -1,5 +1,6 @@
 import IngredientList from './ingredients/IngredientList'
 import StepList from './steps/StepList'
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -34,10 +35,32 @@ const ExpandMore = styled((props) => {
 
 export default function RecipeCard({ recipe }) {
 
+  const router = useRouter();
+
   let website = new URL(recipe.url).hostname;
   const [expanded, setExpanded] = React.useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+
+  const toIndex = () => {
+    router.push(`/`);
+  }
+  
+  const handleDeleteRecipe = async (id) => {
+    const res = await fetch('/api/recipes/', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id })
+    });
+    if (res.ok) {
+      console.log('woo!')
+    } else {
+      console.log('oh no!')
+    }
+    toIndex();
   };
 
 {/* Recipe card wrapped in div to center whole thing */}
@@ -109,6 +132,12 @@ export default function RecipeCard({ recipe }) {
     </Stack>
 
 
+
+
+{/* DELETE from My List */}
+        <IconButton aria-label="delete from My List" onClick={() => handleDeleteRecipe(recipe.id)}>
+          <DeleteIcon />
+        </IconButton>
 
         <ExpandMore
           expand={expanded}

@@ -23,11 +23,28 @@ export default async function handler(req, res) {
       const updatedRecipe = JSON.stringify(
         recipe,
         (key, value) => (typeof value === 'bigint' ? value.toString() : value)
-      )
-      res.status(200).json(updatedRecipe);
+      );
+      return res.status(200).json(updatedRecipe);
     } catch (error) {
-      console.log(`error!`, error)
-      res.status(500).json({ message: 'Something went wrong' });
-    };
-  };
+      console.log(`error!`, error);
+      return res.status(500).json({ message: 'Something went wrong' });
+    }
+  }
+
+  if (req.method === 'DELETE') {
+    const { id } = req.body;
+    try {
+      const deleteRecipe = await prisma.recipe.delete({
+        where: {
+          id: id
+        }
+      });
+      return res.status(200).json(deleteRecipe);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Error deleting recipe' });
+    }
+  } else {
+    return res.status(400).json({ message: 'Invalid HTTP method' });
+  }
 };

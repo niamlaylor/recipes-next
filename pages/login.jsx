@@ -80,8 +80,10 @@ export default function LogIn({ theme }) {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
+
               <AuthButton authProvider={'google'} />
               <AuthButton authProvider={'github'} />
+
               <Button
                 type="submit"
                 fullWidth
@@ -105,6 +107,7 @@ export default function LogIn({ theme }) {
   } else {
     return (
       <ThemeProvider theme={theme}>
+
         <Header onLoggedInPage={true} userLoggedIn={false}/>
         <Box sx={{
             marginTop: 6,
@@ -123,6 +126,7 @@ export default function LogIn({ theme }) {
             Home
           </Button>
         </Box>
+
       </ThemeProvider>
     );
   }
