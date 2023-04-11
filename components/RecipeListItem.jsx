@@ -14,6 +14,8 @@ import TextField from '@mui/material/TextField';
 import { IconButton } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+
 
 const theme = createTheme({
   palette: {
@@ -49,6 +51,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
     router.push(`/`);
   }
 
+  //Helper function for deleting a recipe
   const handleDeleteRecipe = async (id) => {
     const res = await fetch('/api/recipes/', {
       method: 'DELETE',
@@ -58,13 +61,14 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
       body: JSON.stringify({ id })
     });
     if (res.ok) {
-      console.log('woo!')
+      console.log('yay!')
     } else {
       console.log('oh no!')
     }
     toIndex();
   };
-  
+
+  //Handling favorite icon click
   const [favClicked, setFavClicked] = useState(false);
 
   const handleFavClick = async (e) => {
