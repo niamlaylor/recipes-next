@@ -27,7 +27,7 @@ body {
   width: 20%;
 }
 
-.google-btn {
+.googleBtn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,15 +43,44 @@ body {
   width: 100%
 }
 
-.google-btn:hover {
+.googleBtn:hover {
   background-color: #eee;
 }
 
-.google-btn:focus {
+.googleBtn:focus {
   outline: none;
   box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.3);
 }
 
-.google-btn span {
+.googleBtn span {
   margin-left: 10px;
+}
+
+.githubBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%
+}
+
+.githubBtn > img {
+  margin-right: 15px;
+}
+
+.githubBtn:hover {
+  background-color: #24292e;
+}
+
+.githubBtn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(16, 122, 204, 0.3);
 }
