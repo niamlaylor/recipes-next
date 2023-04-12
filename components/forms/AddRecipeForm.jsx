@@ -64,7 +64,7 @@ export default function AddRecipeForm(props) {
           <Typography component="h1" variant="h5">
             Paste a Recipe URL
           </Typography>
-          <Box component="form" onSubmit={getRecipe} noValidate sx={{ mt: 1, minWidth: 500 }}>
+          <Box component="form" onSubmit={getRecipe} noValidate sx={{ mt: 1, minWidth: 500, display: 'flex', flexWrap: 'nowrap' }}>
             <TextField
               margin="normal"
               required
@@ -78,11 +78,11 @@ export default function AddRecipeForm(props) {
               onChange={event => setWebsite(event.target.value)}
             />
             <Button
-              fullWidth
+              
               type="submit"
               variant="contained"
               size="large"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, ml: 2 }}
             >
               SUBMIT
             </Button>
