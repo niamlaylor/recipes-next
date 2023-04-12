@@ -10,7 +10,7 @@ export default async function handler(req, res) {
       const recipe = await prisma.recipe.create({
 
         data: {
-          userId: '1',
+          userId: req.body.userId,
           title: req.body.name,
           duration: `${req.body.time.totalMin}`,
           url: req.body.url,
