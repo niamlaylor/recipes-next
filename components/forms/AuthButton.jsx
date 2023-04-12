@@ -14,8 +14,8 @@ export default function AuthButton ({ authProvider }) {
         width={20}
         height={20}
       />
-      {authProvider === 'google' && <span>Sign in with Google</span>}
-      {authProvider === 'github' && <span>Sign in with Github</span>}
+      {provider === 'google' && <span>Sign in with Google</span>}
+      {provider === 'github' && <span>Sign in with Github</span>}
     </button>
   );
 };
