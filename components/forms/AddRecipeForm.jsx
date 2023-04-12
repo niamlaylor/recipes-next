@@ -2,7 +2,8 @@ import { useState } from "react";
 import axios from 'axios';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Button, Container, Box, Typography, TextField } from '@mui/material';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';  
+import { useSession } from 'next-auth/react';
 
 const theme = createTheme({
   palette: {
@@ -23,6 +24,7 @@ const theme = createTheme({
 export default function AddRecipeForm(props) {
   const [website, setWebsite] = useState(props.website || "");
   const router = useRouter();
+  const { data } = useSession();
 
   const getRecipe = async (event) => {
     event.preventDefault();
@@ -40,7 +42,11 @@ export default function AddRecipeForm(props) {
       const res = await fetch("/api/get-recipe/", fetchOptions);
       const recipeJson = await res.json();
       console.log('Recipe data:', recipeJson);
-      const response = await axios.post('/api/recipes', recipeJson);
+      const recipeJsonWithId = {
+        ...recipeJson,
+        userId: data.user.id
+      };
+      const response = await axios.post('/api/recipes', recipeJsonWithId);
       console.log("Axios request successful", response);
       const recipeId = await JSON.parse(response.data);
       await router.push(`/recipes/${recipeId.id}`);
