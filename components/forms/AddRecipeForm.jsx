@@ -64,7 +64,7 @@ export default function AddRecipeForm(props) {
           <Typography component="h1" variant="h5">
             Paste a Recipe URL
           </Typography>
-          <Box component="form" onSubmit={getRecipe} noValidate sx={{ mt: 1, minWidth: 500, display: 'flex', flexWrap: 'nowrap' }}>
+          <Box component="form" onSubmit={getRecipe} noValidate sx={{ mt: 1, minWidth: 450, display: 'flex', flexWrap: 'nowrap' }}>
             <TextField
               margin="normal"
               required
