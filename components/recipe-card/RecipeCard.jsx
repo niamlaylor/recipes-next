@@ -17,6 +17,7 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import PrintIcon from '@mui/icons-material/Print';
 import { Box } from '@mui/material';
+import { formattedDomain } from '../../utils/helpers';
 
 export default function RecipeCard({ recipe }) {
 
@@ -24,7 +25,7 @@ export default function RecipeCard({ recipe }) {
 
   const router = useRouter();
 
-  let website = new URL(recipe.url).hostname;
+  const website = formattedDomain(recipe.url);
   
   const toIndex = () => {
     router.push(`/`);
@@ -98,7 +99,7 @@ export default function RecipeCard({ recipe }) {
     <IconButton aria-label="recipe source">
       <RestaurantIcon />
     </IconButton>
-    <a style={{ color: '#542307'}} href={recipe.url}>{website}</a>
+    <a style={{ color: '#542307'}} target="_blank" rel="noopener noreferrer" href={recipe.url}>{website}</a>
     </Typography>
 
 {/* DURATION?  */}
