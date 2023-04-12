@@ -64,6 +64,13 @@ export default function RecipeCard({ recipe }) {
     toIndex();
   };
 
+  const removeImageDimensions = (url) => {
+    let lastDash = url.lastIndexOf("-");
+    let lastDot = url.lastIndexOf(".");
+    return url.replace(url.substring(lastDash, lastDot), "");
+  };
+
+
   {/* Recipe card wrapped in div to center whole thing */}
   return (
     <Box style={{ display:'flex', justifyContent:'center'}} pt={7}>
@@ -83,8 +90,8 @@ export default function RecipeCard({ recipe }) {
       
       <CardMedia
         component="img"
-        height="250"
-        image={recipe.img_url}
+        height="350"
+        image={removeImageDimensions(recipe.img_url)}
         alt={recipe.title}
       />
 
