@@ -10,6 +10,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { IconButton } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
+import { formattedDomain } from '../utils/helpers';
 import ConfirmDeletePopup from './confirmations/ConfirmDelete';
 
 const theme = createTheme({
@@ -35,7 +36,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
 
   const router = useRouter();
 
-  const url = new URL(website).hostname;
+  const formattedUrl = formattedDomain(website);
 
   const [open, setOpen] = React.useState(false);
 
@@ -162,7 +163,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
                 {truncateName}
               </Typography>
               <Typography variant="body2">
-                From {url}
+                From {formattedUrl}
               </Typography>
               <Typography gutterBottom variant="body2" component="div">
                 {duration !== 'undefined' ? `${duration} minutes` : ''}
