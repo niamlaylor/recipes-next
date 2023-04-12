@@ -18,6 +18,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
+import { Box } from '@mui/material';
 
 {/* drop down menu function */}
 const ExpandMore = styled((props) => {
@@ -63,10 +64,8 @@ export default function RecipeCard({ recipe }) {
 
   {/* Recipe card wrapped in div to center whole thing */}
   return (
-    <div 
-    style={{ display:'flex', justifyContent:'center' }}
-    sx={{ pt: 2}}>
-
+    <Box style={{ display:'flex', justifyContent:'center'}} pt={7}>
+   
     <Card sx={{ maxWidth: 900 }}
           style={{backgroundColor: '#DCCCC0'}}>
       
@@ -166,6 +165,6 @@ export default function RecipeCard({ recipe }) {
           </CardContent>
         </Collapse>
       </Card>
-    </div>
+    </Box>
   );
 }
