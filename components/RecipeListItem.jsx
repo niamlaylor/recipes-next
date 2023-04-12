@@ -136,7 +136,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
             title="placeholder"
           />
 
-          <CardContent disableSpacing
+          <CardContent
             sx={{
               position: "relative",
               width: '90%', 
@@ -163,7 +163,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
                 {duration !== 'undefined' ? `${duration} minutes` : ''}
               </Typography>
             </div>
-            <CardActions disableSpacing
+            <CardActions
               sx={{
                 width: 300,
                 ml: -2,
@@ -172,7 +172,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
               }}
             >
 
-            <IconButton disableSpacing
+            <IconButton
               aria-label="favorite"
               onClick={handleFavClick}
               sx={{
@@ -183,7 +183,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
               <FavoriteIcon />
             </IconButton>
 
-            <IconButton disableSpacing aria-label="delete" 
+            <IconButton aria-label="delete" 
               sx={{
               flex: "none",
               color: theme.palette.primary.main,
