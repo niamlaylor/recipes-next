@@ -1,21 +1,15 @@
-//import styles from '../styles/RecipeListItem.module.css';
+import * as React from 'react';
 import {useState, useEffect} from 'react';
-import LabelList from './LabelList';
 import { useRouter } from 'next/router';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import { autocompleteClasses, IconButton } from '@mui/material';
+import { IconButton } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-
 
 const theme = createTheme({
   palette: {
@@ -191,7 +185,6 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
               onClick={() => handleDeleteRecipe(id)} >
               <DeleteIcon />
             </IconButton>
-
           </CardActions>
         </CardContent>
       </Card>

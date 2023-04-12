@@ -1,50 +1,100 @@
-import React from "react";
-import handleDeleteRecipe from  "../RecipeListItem";
-import { ThemeProvider } from "@emotion/react";
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import { createTheme, ThemeProvider } from '@mui/styles';
-import Typography from '@mui/material/Typography';
+import * as React from 'react';
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { theme, useTheme } from '@mui/material/styles';
 
-const theme = createTheme({
-  palette: {
-    //Main colour, dark brown
-    primary: {
-      main: '#542307'
-    },
-    //Secondary colour, light brown with reduced opacity
-    secondary: {
-      main: 'rgba(220, 204, 192, 0.5)'
+export default function ConfirmDelete() {
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleDeleteRecipe = async (id) => {
+    const res = await fetch('/api/recipes/', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id })
+    });
+    if (res.ok) {
+      console.log('yay!')
+    } else {
+      console.log('oh no!')
     }
-  },
-  //Nunito Sans font
-  typography: {
-    fontFamily: 'Nunito Sans',
-    fontWeightRegular: 400,
-    fontWeightBold: 700
-  }
-});
+    toIndex();
+  };
 
-//Helper function to show confirmation message on delete
-//Need a way to cancel on after clicking cancel button
-const confirmDelete = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <Card>
-        style={{backgroundColor: theme.palette.secondary.main}} 
-        sx={{ 
-          width: 300, 
-          height: 400
-          }}
-        <CardContent>
-          <Typography variant="h2">Are you sure you want to delete?</Typography>
-            <Button sx={{color: 'red'}} onClick={() => handleDeleteRecipe(id)}>Delete</Button>
-            <Button sx={{color: theme.palette.primary.main}}>Cancel</Button>
-        </CardContent>
-      </Card>
-    </ThemeProvider>
-    )
-  }
-
-  export default confirmDelete;
+    <div>
+      <Button variant="outlined" onClick={handleClickOpen}>
+        Test Button
+      </Button>
+      <Dialog
+        fullScreen={fullScreen}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogTitle id="responsive-dialog-title">
+          {"Are you sure you would like to delete this recipe?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            You cannot undo this action.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button 
+            sx={[
+              {
+                '&:hover': {
+                  color: theme.palette.primary.main,
+                  backgroundColor: 'white',
+                  border: 1,
+                  borderColor: theme.palette.primary.main
+                },
+              backgroundColor: theme.palette.primary.main, 
+              color: 'white',
+              border: 1,
+              borderColor: theme.palette.primary.main
+              },
+            ]} 
+            onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button 
+            sx={[
+              {
+                '&:hover': {
+                  color: 'red',
+                  backgroundColor: 'white',
+                  border: 1,
+                  borderColor: 'red'
+                },
+              backgroundColor: 'red',
+              color: 'white',
+              border: 1,
+              borderColor: 'red'
+              },
+            ]} 
+            onClick={handleDeleteRecipe}>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+}
