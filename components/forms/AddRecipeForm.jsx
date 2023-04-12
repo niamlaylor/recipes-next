@@ -61,7 +61,7 @@ const style = {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <img src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/sifter-loading-small.gif"></img>
+          <img src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/sifter-loading-5s.gif"></img>
           <Typography sx={{color: '#542307'}} id="transition-modal-title" variant="h4" component="h2">
           Loading...
           </Typography>
