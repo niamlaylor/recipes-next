@@ -34,6 +34,8 @@ const ExpandMore = styled((props) => {
 
 export default function RecipeCard({ recipe }) {
 
+  console.log(recipe.labels);
+
   const router = useRouter();
 
   let website = new URL(recipe.url).hostname;
@@ -120,11 +122,9 @@ export default function RecipeCard({ recipe }) {
   </CardContent>
 
               <Stack direction="row" spacing={1}>
-                <Chip label="keto"  />
-                <Chip label="< 60 mins"  />
-                <Chip label="brunch"  />
-                <Chip label="gluten free"  />
-                <Chip label="kid friendly"  />
+                {recipe.labels.map((label) => (
+                  <Chip label={label} key={label} />
+                ))}
               </Stack>
 
               <IconButton aria-label="delete from My List" onClick={() => handleDeleteRecipe(recipe.id)}>
