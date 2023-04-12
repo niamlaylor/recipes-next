@@ -17,7 +17,8 @@ export default async function handler(req, res) {
           ingredients: req.body.ing,
           instructions: req.body.dir,
           img_url: req.body.img,
-          description: req.body.desc
+          description: req.body.desc,
+          labels: req.body.tags
         }
       });
       const updatedRecipe = JSON.stringify(
