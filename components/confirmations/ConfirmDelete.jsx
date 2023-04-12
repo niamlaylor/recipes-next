@@ -7,45 +7,18 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { theme, useTheme } from '@mui/material/styles';
+import RecipeListItem from '../RecipeListItem';
 
-export default function ConfirmDelete() {
-  const [open, setOpen] = React.useState(false);
+export default function ConfirmDeletePopup(props) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleDeleteRecipe = async (id) => {
-    const res = await fetch('/api/recipes/', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ id })
-    });
-    if (res.ok) {
-      console.log('yay!')
-    } else {
-      console.log('oh no!')
-    }
-    toIndex();
-  };
-
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Test Button
-      </Button>
       <Dialog
         fullScreen={fullScreen}
-        open={open}
-        onClose={handleClose}
+        open={props.open}
+        onClose={props.handleClose}
         aria-labelledby="responsive-dialog-title"
       >
         <DialogTitle id="responsive-dialog-title">
@@ -72,7 +45,7 @@ export default function ConfirmDelete() {
               borderColor: theme.palette.primary.main
               },
             ]} 
-            onClick={handleClose}>
+            onClick={props.handleClose}>
             Cancel
           </Button>
           <Button 
@@ -90,7 +63,7 @@ export default function ConfirmDelete() {
               borderColor: 'red'
               },
             ]} 
-            onClick={handleDeleteRecipe}>
+            onClick={props.handleDeleteRecipe}>
             Delete
           </Button>
         </DialogActions>
