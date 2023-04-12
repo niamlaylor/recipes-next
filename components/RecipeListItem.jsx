@@ -12,6 +12,7 @@ import { IconButton } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import { formattedDomain } from '../utils/helpers';
 import ConfirmDeletePopup from './confirmations/ConfirmDelete';
+import LoadingPopup from './confirmations/LoadingPopup';
 
 const theme = createTheme({
   palette: {
@@ -201,7 +202,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
         </CardContent>
       </Card>
       <ConfirmDeletePopup open={open} handleClose={handleClose} handleDeleteRecipe={handleDeleteRecipe}></ConfirmDeletePopup>
-    </ThemeProvider>
+\    </ThemeProvider>
   );
 }
 
