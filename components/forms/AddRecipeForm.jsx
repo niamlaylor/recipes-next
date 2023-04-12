@@ -141,7 +141,6 @@ const style = {
           </Box>
         </Box>
       </Container>
-      <LoadingPopup></LoadingPopup>
     </ThemeProvider>
   );
 };
