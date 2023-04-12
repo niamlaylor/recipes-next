@@ -10,6 +10,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { IconButton } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
+import { formattedDomain } from '../utils/helpers';
 
 const theme = createTheme({
   palette: {
@@ -34,7 +35,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
 
   const router = useRouter();
 
-  const url = new URL(website).hostname;
+  const formattedUrl = formattedDomain(website);
 
   //Helper function to handle recipe click
   const handleRecipeClick = (recipeId) => {
@@ -151,7 +152,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
                 {truncateName}
               </Typography>
               <Typography variant="body2">
-                From {url}
+                From {formattedUrl}
               </Typography>
               <Typography gutterBottom variant="body2" component="div">
                 {duration !== 'undefined' ? `${duration} minutes` : ''}
