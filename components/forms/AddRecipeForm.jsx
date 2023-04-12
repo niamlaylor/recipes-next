@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Button, Container, Box, Typography, TextField } from '@mui/material';
+import { Button, Container, Box, Typography, TextField, Modal } from '@mui/material';
 import { useRouter } from 'next/router';  
 import { useSession } from 'next-auth/react';
 
@@ -22,10 +22,56 @@ const theme = createTheme({
 });
 
 export default function AddRecipeForm(props) {
+  //State for website
   const [website, setWebsite] = useState(props.website || "");
   const router = useRouter();
   const { data } = useSession();
 
+const LoadingPopup = function() {
+  //State for Loading Popup
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+//Style for loading popup modal
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #542307',
+  boxShadow: 24,
+  p: 4,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  //display: open ? "flex" : "none"
+};
+
+  //Return loading popup modal
+  return (
+    <div>
+      <Button onClick={handleOpen}>Loading Test...</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <img src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/sifter-loading-small.gif"></img>
+          <Typography sx={{color: '#542307'}} id="transition-modal-title" variant="h4" component="h2">
+          Loading...
+          </Typography>
+        </Box>
+      </Modal>
+    </div>
+  );
+}
+
+//Async function to get recipe
   const getRecipe = async (event) => {
     event.preventDefault();
     const fetchOptions = {
@@ -95,6 +141,7 @@ export default function AddRecipeForm(props) {
           </Box>
         </Box>
       </Container>
+      <LoadingPopup></LoadingPopup>
     </ThemeProvider>
   );
 };
