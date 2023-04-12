@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import { IconButton } from '@mui/material';
 import CardActions from '@mui/material/CardActions';
 import { formattedDomain } from '../utils/helpers';
+import ConfirmDeletePopup from './confirmations/ConfirmDelete';
 
 const theme = createTheme({
   palette: {
@@ -37,6 +38,16 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
 
   const formattedUrl = formattedDomain(website);
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   //Helper function to handle recipe click
   const handleRecipeClick = (recipeId) => {
     router.push(`/recipes/${recipeId}`);
@@ -47,7 +58,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
   }
 
   //Helper function for deleting a recipe
-  const handleDeleteRecipe = async (id) => {
+  const handleDeleteRecipe = async () => {
     const res = await fetch('/api/recipes/', {
       method: 'DELETE',
       headers: {
@@ -183,12 +194,13 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
               flex: "none",
               color: theme.palette.primary.main,
               }} 
-              onClick={() => handleDeleteRecipe(id)} >
+              onClick={handleClickOpen} >
               <DeleteIcon />
             </IconButton>
           </CardActions>
         </CardContent>
       </Card>
+      <ConfirmDeletePopup open={open} handleClose={handleClose} handleDeleteRecipe={handleDeleteRecipe}></ConfirmDeletePopup>
     </ThemeProvider>
   );
 }
