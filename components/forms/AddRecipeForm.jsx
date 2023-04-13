@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from 'axios';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Button, Container, Box, Typography, TextField, Modal } from '@mui/material';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { useRouter } from 'next/router';  
 import { useSession } from 'next-auth/react';
 
@@ -27,28 +28,28 @@ export default function AddRecipeForm(props) {
   const router = useRouter();
   const { data } = useSession();
 
-const LoadingPopup = function() {
-  //State for Loading Popup
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const LoadingPopup = function() {
+    //State for Loading Popup
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
-//Style for loading popup modal
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #542307',
-  boxShadow: 24,
-  p: 4,
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  //display: open ? "flex" : "none"
-};
+  //Style for loading popup modal
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #542307',
+    boxShadow: 24,
+    p: 4,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    //display: open ? "flex" : "none"
+  };
 
   //Return loading popup modal
   return (
@@ -101,6 +102,17 @@ const style = {
     }
   };
 
+  const handleClipboardButtonClick = async (event) => {
+    try {
+      const clipboardValue = await navigator.clipboard.readText();
+      setWebsite(clipboardValue);
+      console.log(`Pasted from your clipboard: ${website}`)
+      await getRecipe(event)
+    } catch (e) {
+      console.log(`Unable to read your clipboard with error: ${e}`)
+    };
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="lg">
@@ -137,6 +149,15 @@ const style = {
               sx={{ mt: 3, mb: 2, ml: 2 }}
             >
               GET RECIPE
+            </Button>
+            <Button
+              onClick={handleClipboardButtonClick}
+              type="submit"
+              variant="contained"
+              size="large"
+              sx={{ mt: 3, mb: 2, ml: 0.5, backgroundColor: '#AEC5D2' }}
+            >
+              <ContentCopyIcon/>
             </Button>
           </Box>
         </Box>
