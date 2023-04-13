@@ -4,6 +4,9 @@ import RecipeList from '../components/RecipeList';
 import Header from '../components/navigation/Header';
 import AddRecipeForm from '../components/forms/AddRecipeForm';
 import { getSession } from 'next-auth/react';
+import Fab from '@mui/material/IconButton';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+
 
 import { PrismaClient } from '@prisma/client';
 
@@ -38,6 +41,15 @@ export async function getServerSideProps(context) {
   };
 }
 
+const style = {
+  top: 'auto',
+  right: 20,
+  bottom: 30,
+  left: 'auto',
+  position: 'sticky'
+};
+
+
 export default function Home({ recipes = [] } ) {
 
   return (
@@ -46,7 +58,11 @@ export default function Home({ recipes = [] } ) {
       <main className="mainList">
         <AddRecipeForm /> 
         <RecipeList recipes={recipes}/>
-      </main>
+       </main>
+       <Fab aria-label="back to top" href="#top" style={style} >
+            <ArrowUpwardIcon color="primary" fontSize='large'/>
+          </Fab>
+              
     </>
   )
 }
