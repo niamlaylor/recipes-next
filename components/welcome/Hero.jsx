@@ -22,12 +22,13 @@ const theme = createTheme({
   }
 });
 
-const heroImage = "https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/burger-1280x853.jpg";
+const heroImage = "https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/burger-1920x1280.jpg";
 
 const styles = {
   boxContainer: {
       height: 600,
       backgroundImage: `url(${heroImage})`,
+      backgroundPosition: '25% 40%'
   },
   overlay: {
     height: 500,
