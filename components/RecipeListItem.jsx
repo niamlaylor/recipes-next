@@ -144,20 +144,13 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
 
           <CardContent
             sx={{
-              position: "relative",
-              width: '90%', 
-              alignSelf: 'flex-start',
-              height: 100,
-              display: "inline",
-              flexDirection: "column",
-              
-            }}>
+              marginTop: "auto"            }}>
             <div onClick={() => handleRecipeClick(id)}>
               <Typography gutterBottom variant="h6" component="div" 
                 sx={{ 
                   fontWeight: 700,
                   lineHeight: '28px',
-                  display: "inline",
+                  height: '55px',
                   flexDirection: "column"              
                 }}>
                 {truncateName}
@@ -174,7 +167,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
                 width: 300,
                 ml: -2,
                 mt: 5,
-                mb: 0,
+                mb: 0
               }}
             >
 
