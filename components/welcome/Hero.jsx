@@ -27,13 +27,13 @@ const heroImage = "https://raw.githubusercontent.com/niamlaylor/recipes-next/mai
 const styles = {
   boxContainer: {
       height: 600,
-      backgroundImage: `url(${heroImage})`
+      backgroundImage: `url(${heroImage})`,
   },
   overlay: {
     height: 500,
     width: '100%',
-    paddingTop: 'auto',
-    paddingBottom: 'auto',
+    paddingTop: 100,
+    paddingBottom: 0,
     position: 'absolute',
     display: 'flex',
     flexDirection: 'column',
