@@ -119,7 +119,7 @@ export default function RecipeListItem({id, name, website, duration, labels, ima
     fetchFavorite();
   }, [id]);
 
-    const truncateName = name.length > 50 ? name.substring(0, 50) + "..." : name;
+    const truncateName = name.length > 45 ? name.substring(0, 45) + "..." : name;
 
     return (
       <ThemeProvider theme={theme}>
