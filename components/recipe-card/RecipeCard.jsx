@@ -118,7 +118,7 @@ export default function RecipeCard({ recipe }) {
   </CardContent>
 
 {/* LABELS  */}
-              <Stack direction="row" spacing={1}>
+              <Stack direction="row" spacing={1} sx={{ pr: 1 }}>
                 {recipe.labels.map((label) => (
                   <Chip label={label} key={label} />
                 ))}

@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 
 
 export default function TagsInput(){
@@ -21,13 +22,16 @@ export default function TagsInput(){
 
     return (
       <Box>
+        <Stack direction="row" spacing={1}>
           { tags.map((tag, index) => (
-              <Box key={index}>
-                <Typography>{tag}</Typography>
-                <Typography onClick={() => removeTag(index)}>&times;</Typography>
-              </Box>
+              <Chip key={index}
+                    label={tag+" ×"} 
+                    onClick={() => removeTag(index)}/>
           )) }
           <TextField variant="standard" size="small" sx={{ pl: 2 }} onKeyDown={handleKeyDown} placeholder="Add a tag" />
+      </Stack>
       </Box>
   )
 }
+
+
