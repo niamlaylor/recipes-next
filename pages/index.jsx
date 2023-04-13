@@ -6,7 +6,8 @@ import AddRecipeForm from '../components/forms/AddRecipeForm';
 import { getSession } from 'next-auth/react';
 import Fab from '@mui/material/IconButton';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+import Slide from '@mui/material/Slide';
 
 import { PrismaClient } from '@prisma/client';
 
@@ -50,8 +51,11 @@ const style = {
 };
 
 
+
 export default function Home({ recipes = [] } ) {
 
+  const trigger = useScrollTrigger();
+  
   return (
     <>
       <Header />
@@ -59,10 +63,13 @@ export default function Home({ recipes = [] } ) {
         <AddRecipeForm /> 
         <RecipeList recipes={recipes}/>
        </main>
+
+       <Slide in={!!trigger}>
        <Fab aria-label="back to top" href="#top" style={style} >
             <ArrowUpwardIcon color="primary" fontSize='large'/>
-          </Fab>
-              
+          </Fab>            
+          </Slide> 
+          
     </>
   )
 }
