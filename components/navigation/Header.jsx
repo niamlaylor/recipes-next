@@ -8,7 +8,6 @@ import Button from '@mui/material/Button';
 import { useSession, signOut } from 'next-auth/react';
 import NavLink from "./NavLink";
 import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
 
