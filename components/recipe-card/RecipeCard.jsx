@@ -1,5 +1,6 @@
 import IngredientList from './ingredients/IngredientList'
 import StepList from './steps/StepList'
+import Tags from './Tags'
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import Card from '@mui/material/Card';
@@ -122,6 +123,9 @@ export default function RecipeCard({ recipe }) {
                   <Chip label={label} key={label} />
                 ))}
               </Stack>
+
+              <Tags style={{ backgroundcolor: '#542307'}} />
+
 
 {/* PRINT */}
               <IconButton aria-label="print Recipe Card" onClick={() => window.print()}>
