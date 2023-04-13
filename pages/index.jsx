@@ -46,7 +46,7 @@ const style = {
   right: 20,
   bottom: 30,
   left: 'auto',
-  position: 'sticky'
+  position: 'fixed'
 };
 
 
