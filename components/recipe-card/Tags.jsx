@@ -1,5 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Box, Chip, Stack, TextField } from '@mui/material';
+import styled from '@emotion/styled';
+
+//mediaquery to ignore Tags in Print view
+const PrintBox = styled(Box)`
+@media print {
+  display: none
+}
+`
 
 export default function TagsInput(props) {
   const [tags, setTags] = useState([]);
@@ -67,7 +75,7 @@ export default function TagsInput(props) {
   };
 
   return (
-    <Box>
+    <PrintBox>
       <Stack direction="row" spacing={1}>
         {tags.map((tag) => (
           <Chip
@@ -84,7 +92,7 @@ export default function TagsInput(props) {
           onKeyDown={handleAddLabel}
         />
       </Stack>
-    </Box>
+    </PrintBox>
   );
 }
 
