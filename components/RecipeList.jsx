@@ -1,9 +1,18 @@
+import { useState } from 'react';
 import RecipeListItem from './RecipeListItem';
 import Grid from '@mui/material/Grid';
+import { IconButton, FavoriteIcon } from '@mui/material';
 
 export default function RecipeList({ recipes }) {
+  const [showFavorites, setShowFavorites] = useState(false);
 
-  const recipeList = recipes.map((recipe) => (
+  const handleToggleFavorites = () => {
+    setShowFavorites(!showFavorites);
+  }
+
+  const filteredRecipes = showFavorites ? recipes.filter(recipe => recipe.favorite) : recipes;
+
+  const recipeList = filteredRecipes.map((recipe) => (
     <Grid item xs="auto" key={recipe.id}>
       <RecipeListItem
         id={recipe.id}
