@@ -25,6 +25,9 @@ export default NextAuth({
       }
       return session;
     },
+    async redirect() {
+      return '/'
+    },
   },
   secret: process.env.JWT_SECRET
 });
