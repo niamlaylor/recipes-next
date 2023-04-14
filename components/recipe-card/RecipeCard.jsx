@@ -10,8 +10,6 @@ import Tags from './Tags';
 
 export default function RecipeCard({ recipe }) {
 
-  console.log(recipe.labels);
-
   const router = useRouter();
 
   const website = formattedDomain(recipe.url);
