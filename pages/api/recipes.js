@@ -54,7 +54,8 @@ export default async function handler(req, res) {
           id: req.body.id
         },
         data: {
-          favorite: req.body.favorite
+          favorite: req.body.favorite,
+          labels: req.body.labels
         }
       });
       return res.status(200).json(recipe);

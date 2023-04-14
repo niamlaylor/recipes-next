@@ -1,37 +1,91 @@
-import { useState } from 'react'
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
+import { useState, useEffect } from 'react';
+import { Box, Chip, Stack, TextField } from '@mui/material';
 
+export default function TagsInput(props) {
+  const [tags, setTags] = useState([]);
 
-export default function TagsInput(){
-    const [tags, setTags] = useState([])
+  useEffect(() => {
+    const fetchRecipeLabels = async () => {
+      try {
+        const response = await fetch(`/api/recipes?id=${props.id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch recipe labels');
+        }
+        const { labels } = await response.json();
+        setTags(labels);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchRecipeLabels();
+  }, [props.id]);
 
-    function handleKeyDown(e){
-        if(e.key !== 'Enter') return
-        const value = e.target.value
-        if(!value.trim()) return
-        setTags([...tags, value])
-        e.target.value = ''
+  const handleAddLabel = async (e) => {
+    if (e.key !== 'Enter') return;
+    const value = e.target.value.trim();
+    if (!value) return;
+    const response = await fetch('/api/recipes', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: props.id,
+        labels: [...tags, value],
+      }),
+    });
+    if (response.ok) {
+      setTags((prevTags) => [...prevTags, value]);
+      e.target.value = '';
+    } else {
+      console.error('Failed to update labels.');
     }
+  };
 
-    function removeTag(index){
-        setTags(tags.filter((el, i) => i !== index))
+  const handleRemoveTag = async (tag) => {
+    const updatedTags = tags.filter((t) => t !== tag);
+    const response = await fetch('/api/recipes', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: props.id,
+        labels: updatedTags,
+      }),
+    });
+    if (response.ok) {
+      setTags(updatedTags);
+    } else {
+      console.error('Failed to update labels.');
     }
+  };
 
-    return (
-      <Box>
-        <Stack direction="row" spacing={1}>
-          { tags.map((tag, index) => (
-              <Chip key={index}
-                    label={tag+" ×"} 
-                    onClick={() => removeTag(index)}/>
-          )) }
-          <TextField variant="standard" size="small" sx={{ pl: 2 }} onKeyDown={handleKeyDown} placeholder="Add a tag" />
+  return (
+    <Box>
+      <Stack direction="row" spacing={1}>
+        {tags.map((tag) => (
+          <Chip
+            key={tag}
+            label={`${tag} ×`}
+            onClick={() => handleRemoveTag(tag)}
+          />
+        ))}
+        <TextField
+          variant="standard"
+          size="small"
+          sx={{ pl: 2 }}
+          placeholder="Add a tag"
+          onKeyDown={handleAddLabel}
+        />
       </Stack>
-      </Box>
-  )
+    </Box>
+  );
 }
 
 
