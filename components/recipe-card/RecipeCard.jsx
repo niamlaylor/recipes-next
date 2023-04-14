@@ -20,7 +20,7 @@ import { formattedDomain } from '../../utils/helpers';
 import styled from '@emotion/styled';
 
 
-//mediaquery to ignore Tags in Print view
+//media query to omit Recipe Source site in Print view (replaces <a> tag)
 const PrintLink = styled.a`
 @media print {
   display: none
@@ -67,8 +67,7 @@ export default function RecipeCard({ recipe }) {
   return (
     <Box style={{ display:'flex', justifyContent:'center'}} pt={7}>
      
-    <Card sx={{ maxWidth: 900 }}
-          style={{backgroundColor: '#DCCCC0'}}>
+    <Card style={{backgroundColor: '#DCCCC0', maxWidth: 900}}>
 
 {/* TITLE & BACK ARROW  */}      
       <CardHeader
@@ -141,26 +140,18 @@ export default function RecipeCard({ recipe }) {
         </CardActions>
 
 {/* INGREDIENTS */}
-          <CardContent>
-
-            <Typography paragraph variant="h4">
+            <Typography variant="h4">
               Ingredients
             </Typography>
 
-            <Typography paragraph>
               <IngredientList ingredients={recipe.ingredients}/>
-            </Typography>
-{/* METHOD  */}
 
-            <Typography paragraph variant="h4">
+{/* METHOD  */}
+            <Typography variant="h4">
               Method
             </Typography>
 
-            <Typography paragraph>
               <StepList steps={recipe.instructions}/>
-            </Typography>
-
-          </CardContent>
 
       </Card>
     </Box>
