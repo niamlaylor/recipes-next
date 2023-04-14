@@ -47,6 +47,7 @@ export default function Hero() {
   return (
       <Box style={styles.boxContainer}>
       <div style={styles.overlay}>
+        <img></img>
         <Typography variant="h2" textAlign='center' color='white' sx={{ mb: 3 }}>Hungry?</Typography>
         <Typography variant="h4" textAlign='center' color='white' sx={{ mb: 3 }}>No profound stories, no ads, no pop-ups. <br /> (Maybe - cookies.)</Typography>
         <Typography variant="h6" textAlign='center' color='white'>Enter the URL of a great recipe, and we'll send it back with what you need – <br /> so you can spend less time scrolling, and more time sautéeing.</Typography>
