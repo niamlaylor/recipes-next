@@ -5,6 +5,27 @@ import Footer from '../components/footer/Footer';
 
 
 const theme = createTheme({
+  components: {
+    MuiCardMedia: {
+      styleOverrides: {
+        root: {
+          "@media print": {
+            display: "none"
+          }}}},
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          "@media print": {
+            display: "none"
+          }}}},
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          "@media print": {
+            display: "none"
+          }}}}
+  },
+
   palette: {
     //Main colour, dark brown
     primary: {

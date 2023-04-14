@@ -14,11 +14,18 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
 import PrintIcon from '@mui/icons-material/Print';
 import { Box } from '@mui/material';
 import { formattedDomain } from '../../utils/helpers';
+import styled from '@emotion/styled';
+
+
+//mediaquery to ignore Tags in Print view
+const PrintLink = styled.a`
+@media print {
+  display: none
+}
+`
 
 export default function RecipeCard({ recipe }) {
 
@@ -100,7 +107,7 @@ export default function RecipeCard({ recipe }) {
     <IconButton aria-label="recipe source">
       <RestaurantIcon />
     </IconButton>
-    <a style={{ color: '#542307'}} target="_blank" rel="noopener noreferrer" href={recipe.url}>{website}</a>
+    <PrintLink style={{ color: '#542307'}} target="_blank" rel="noopener noreferrer" href={recipe.url}>{website}</PrintLink>
     </Typography>
 
 {/* DURATION?  */}
