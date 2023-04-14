@@ -4,8 +4,16 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
+import styled from '@emotion/styled';
 
+//mediaquery to ignore footer in Print view
+const PrintFooter = styled.footer`
+@media print {
+  display: none
+}
+`
 const theme = createTheme({
+  
     palette: {
       //Main colour, dark brown
       primary: {
@@ -26,7 +34,7 @@ const theme = createTheme({
 
 export default function Footer( ) {
     return (
-      <footer>
+      <PrintFooter>
           <ThemeProvider theme={theme}>
               <Divider sx={{
                         mt: 5
@@ -46,6 +54,6 @@ export default function Footer( ) {
                     </Box>
                 </Container>
         </ThemeProvider>
-      </footer>
+      </PrintFooter>
     );
   };

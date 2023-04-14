@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import { Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography, Chip, Stack } from '@mui/material';
@@ -7,11 +8,19 @@ import { formattedDomain } from '../../utils/helpers';
 import IngredientList from './ingredients/IngredientList';
 import StepList from './steps/StepList';
 import Tags from './Tags';
+import styled from '@emotion/styled';
+
+
+//media query to omit Recipe Source site in Print view (replaces <a> tag)
+const PrintLink = styled.a`
+@media print {
+  display: none
+}
+`
 
 export default function RecipeCard({ recipe }) {
 
   const router = useRouter();
-
   const website = formattedDomain(recipe.url);
   
   const toIndex = () => {
@@ -44,10 +53,11 @@ export default function RecipeCard({ recipe }) {
 
   /* FULL Recipe card wrapped in box to center whole thing */
   return (
-    <Box style={{ display:'flex', justifyContent:'center'}} pt={7}>
+    <Box style={{ display:'flex', justifyContent:'center'}} pt={7}
+    >
      
-    <Card sx={{ maxWidth: 900 }}
-          style={{backgroundColor: '#DCCCC0'}}>
+    <Card style={{backgroundColor: '#DCCCC0'}}
+    sx={{ width: '70%'}}>
 
       {/* TITLE & BACK ARROW  */}      
       <CardHeader
@@ -86,7 +96,7 @@ export default function RecipeCard({ recipe }) {
           <IconButton aria-label="recipe source">
             <RestaurantIcon />
           </IconButton>
-          <a style={{ color: '#542307'}} target="_blank" rel="noopener noreferrer" href={recipe.url}>{website}</a>
+          <PrintLink style={{ color: '#542307'}} target="_blank" rel="noopener noreferrer" href={recipe.url}>{website}</PrintLink>
           </Typography>
 
           {/* DURATION?  */}
@@ -94,25 +104,39 @@ export default function RecipeCard({ recipe }) {
             {recipe.duration === undefined ?
               <IconButton aria-label="recipe duration">
                 <AccessTimeIcon />
-              </IconButton>
-              :
-              <span></span>
-            }
+                </IconButton>
+                :
+                <span></span>
+              }
             {recipe.duration === undefined ? `${recipe.duration} minutes` : ''}
           </Typography>
-
         </CardContent>
-
-        {/* LABELS  */}
-        <Tags id={recipe.id} />
-
+        {/* PRINT */}
         <IconButton aria-label="print Recipe Card" onClick={() => window.print()}>
           <PrintIcon />
         </IconButton>
 
+        {/* DELETE */}
         <IconButton aria-label="delete from My List" onClick={() => handleDeleteRecipe(recipe.id)}>
           <DeleteIcon />
         </IconButton>
+        
+        {/* LABELS  */}
+        <Tags id={recipe.id} />
+
+        {/* INGREDIENTS */}
+        <Typography pt={4} pl={2} variant="h4">
+          Ingredients
+        </Typography>
+
+        <IngredientList ingredients={recipe.ingredients}/>
+
+        {/* METHOD  */}
+        <Typography pl={2} variant="h4">
+          Method
+        </Typography>
+
+        <StepList steps={recipe.instructions}/>
 
       </CardActions>
 
