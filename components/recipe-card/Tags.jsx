@@ -47,18 +47,33 @@ export default function TagsInput(props) {
     }
   };
 
-  const handleRemoveTag = (index) => {
-    setTags((prevTags) => prevTags.filter((_, i) => i !== index));
+  const handleRemoveTag = async (tag) => {
+    const updatedTags = tags.filter((t) => t !== tag);
+    const response = await fetch('/api/recipes', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: props.id,
+        labels: updatedTags,
+      }),
+    });
+    if (response.ok) {
+      setTags(updatedTags);
+    } else {
+      console.error('Failed to update labels.');
+    }
   };
 
   return (
     <Box>
       <Stack direction="row" spacing={1}>
-        {tags.map((tag, index) => (
+        {tags.map((tag) => (
           <Chip
-            key={index}
+            key={tag}
             label={`${tag} ×`}
-            onClick={() => handleRemoveTag(index)}
+            onClick={() => handleRemoveTag(tag)}
           />
         ))}
         <TextField
@@ -72,4 +87,5 @@ export default function TagsInput(props) {
     </Box>
   );
 }
+
 
