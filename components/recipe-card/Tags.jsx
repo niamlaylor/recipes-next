@@ -76,6 +76,13 @@ export default function TagsInput(props) {
 
   return (
     <PrintBox>
+      <TextField
+          variant="standard"
+          size="small"
+          sx={{ pl: 3, pb: 3 }}
+          placeholder="Add a tag"
+          onKeyDown={handleAddLabel}
+        />
       <Stack direction="row" spacing={1}>
         {tags.map((tag) => (
           <Chip
@@ -84,13 +91,6 @@ export default function TagsInput(props) {
             onClick={() => handleRemoveTag(tag)}
           />
         ))}
-        <TextField
-          variant="standard"
-          size="small"
-          sx={{ pl: 2 }}
-          placeholder="Add a tag"
-          onKeyDown={handleAddLabel}
-        />
       </Stack>
     </PrintBox>
   );
