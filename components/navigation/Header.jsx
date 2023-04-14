@@ -72,8 +72,8 @@ export default function Header() {
         src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/sifterLogo.png"/>
             </Link>
 
-            <Typography variant="h6" component="div" sx={{color: '#542307' }}>
-          <NavLink href={"/account"}>{session.user.name}</NavLink>'s List
+            <Typography variant="h6" component="div" sx={{color: '#542307' }} >
+          <NavLink  href={"/account"}>{session.user.name}</NavLink>'s List
           </Typography>
 
           <Search>
