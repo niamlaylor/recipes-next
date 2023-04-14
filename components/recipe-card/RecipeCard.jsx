@@ -69,7 +69,7 @@ export default function RecipeCard({ recipe }) {
     >
      
     <Card style={{backgroundColor: '#DCCCC0'}}
-    sx={{ maxWidth: '70%'}}>
+    sx={{ width: '70%'}}>
 
 {/* TITLE & BACK ARROW  */}      
       <CardHeader
