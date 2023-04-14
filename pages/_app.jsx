@@ -5,6 +5,17 @@ import Footer from '../components/footer/Footer';
 
 
 const theme = createTheme({
+  components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          "@media print": {
+            display: "none"
+          }
+        }
+      }
+    }
+  },
   palette: {
     //Main colour, dark brown
     primary: {
