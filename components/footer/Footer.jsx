@@ -13,9 +13,7 @@ const PrintFooter = styled.footer`
 }
 `
 const theme = createTheme({
-  "@media print": {
-    display: "none"
-  },
+  
     palette: {
       //Main colour, dark brown
       primary: {
