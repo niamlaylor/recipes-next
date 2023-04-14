@@ -65,9 +65,11 @@ export default function RecipeCard({ recipe }) {
 
 {/* FULL Recipe card wrapped in box to center whole thing */}
   return (
-    <Box style={{ display:'flex', justifyContent:'center'}} pt={7}>
+    <Box style={{ display:'flex', justifyContent:'center'}} pt={7}
+    >
      
-    <Card style={{backgroundColor: '#DCCCC0', maxWidth: 900}}>
+    <Card style={{backgroundColor: '#DCCCC0'}}
+    sx={{ maxWidth: '70%'}}>
 
 {/* TITLE & BACK ARROW  */}      
       <CardHeader
@@ -123,10 +125,6 @@ export default function RecipeCard({ recipe }) {
 
   </CardContent>
 
-{/* LABELS  */}
-              <Tags style={{ backgroundcolor: '#542307'}} id={recipe.id} />
-
-
 {/* PRINT */}
               <IconButton aria-label="print Recipe Card" onClick={() => window.print()}>
                 <PrintIcon />
@@ -139,15 +137,19 @@ export default function RecipeCard({ recipe }) {
 
         </CardActions>
 
+{/* LABELS  */}
+<Tags style={{ backgroundcolor: '#542307'}} id={recipe.id} />
+
+
 {/* INGREDIENTS */}
-            <Typography variant="h4">
+            <Typography pt={4} pl={2} variant="h4">
               Ingredients
             </Typography>
 
               <IngredientList ingredients={recipe.ingredients}/>
 
 {/* METHOD  */}
-            <Typography variant="h4">
+            <Typography pl={2} variant="h4">
               Method
             </Typography>
 
