@@ -72,8 +72,8 @@ export default function TagsInput(props) {
         {tags.map((tag) => (
           <Chip
             key={tag}
-            label={`${tag} ×`}
-            onClick={() => handleRemoveTag(tag)}
+            label={tag}
+            onDelete={() => handleRemoveTag(tag)} // Add onDelete prop
           />
         ))}
         <TextField
@@ -87,5 +87,3 @@ export default function TagsInput(props) {
     </Box>
   );
 }
-
-
