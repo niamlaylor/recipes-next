@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import RecipeListItem from './RecipeListItem';
 import Grid from '@mui/material/Grid';
-import { IconButton, FavoriteIcon } from '@mui/material';
+import { IconButton } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export default function RecipeList({ recipes }) {
   const [showFavorites, setShowFavorites] = useState(false);
@@ -27,7 +28,18 @@ export default function RecipeList({ recipes }) {
 
   return (
     <section style={{ marginLeft: '50px', marginRight: '50px' }}>
+      <IconButton
+        aria-label="favorite"
+        onClick={handleToggleFavorites}
+        sx={{
+          flex: "none",
+          color: showFavorites ? 'red' : 'inherit',
+        }}
+      >
+        <FavoriteIcon />
+      </IconButton>
       <h2 style={{ color: '#542307'}}>My List </h2>
+      <h3></h3>
       <Grid container spacing={2}>
         {recipeList}
       </Grid>
