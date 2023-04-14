@@ -23,8 +23,9 @@ const theme = createTheme({
 
 export default function NotFound() {
   return (
-    <Box sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-      <Typography variant="h1" sx={{ mt: 5 }}>404</Typography>
+    <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", mt: 15, mb: 15}}>
+      <img src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/404-egg-icon.png" />
+      <Typography variant="h1">404</Typography>
       <Typography variant="h5">Sorry, this page was not found.</Typography>
       <Button
         type="submit"
