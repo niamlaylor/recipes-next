@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
+import { Box, Chip, Stack, TextField } from '@mui/material';
 
 export default function TagsInput(props) {
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    const getLabels = async () => {
+    const fetchRecipeLabels = async () => {
       try {
         const response = await fetch(`/api/recipes?id=${props.id}`, {
           method: 'GET',
@@ -16,23 +13,22 @@ export default function TagsInput(props) {
             'Content-Type': 'application/json',
           },
         });
-        if (response.ok) {
-          const recipeData = await response.json();
-          setTags(recipeData.labels);
-        } else {
+        if (!response.ok) {
           throw new Error('Failed to fetch recipe labels');
         }
+        const { labels } = await response.json();
+        setTags(labels);
       } catch (error) {
         console.error(error);
       }
     };
-    getLabels();
+    fetchRecipeLabels();
   }, [props.id]);
 
-  const addLabel = async (e) => {
+  const handleAddLabel = async (e) => {
     if (e.key !== 'Enter') return;
-    const value = e.target.value;
-    if (!value.trim()) return;
+    const value = e.target.value.trim();
+    if (!value) return;
     const response = await fetch('/api/recipes', {
       method: 'PUT',
       headers: {
@@ -40,37 +36,40 @@ export default function TagsInput(props) {
       },
       body: JSON.stringify({
         id: props.id,
-        labels: [...tags, value]
+        labels: [...tags, value],
       }),
     });
     if (response.ok) {
-      setTags([...tags, value]);
+      setTags((prevTags) => [...prevTags, value]);
       e.target.value = '';
     } else {
       console.error('Failed to update labels.');
     }
   };
 
-  function handleKeyDown(e) {
-    if (e.key !== 'Enter') return;
-    const value = e.target.value;
-    if (!value.trim()) return;
-    setTags([...tags, value]);
-    e.target.value = '';
-  }
-
-  function removeTag(index) {
-    setTags(tags.filter((el, i) => i !== index));
-  }
+  const handleRemoveTag = (index) => {
+    setTags((prevTags) => prevTags.filter((_, i) => i !== index));
+  };
 
   return (
     <Box>
       <Stack direction="row" spacing={1}>
         {tags.map((tag, index) => (
-          <Chip key={index} label={tag + ' ×'} onClick={() => removeTag(index)} />
+          <Chip
+            key={index}
+            label={`${tag} ×`}
+            onClick={() => handleRemoveTag(index)}
+          />
         ))}
-        <TextField variant="standard" size="small" sx={{ pl: 2 }} onKeyDown={addLabel} placeholder="Add a tag" />
+        <TextField
+          variant="standard"
+          size="small"
+          sx={{ pl: 2 }}
+          placeholder="Add a tag"
+          onKeyDown={handleAddLabel}
+        />
       </Stack>
     </Box>
   );
 }
+
