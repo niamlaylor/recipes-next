@@ -116,8 +116,7 @@ export default function Header() {
             <Typography variant="body1" component="div" sx={{color: '#542307'}}>
           </Typography>
 
-          <Button variant="outlined" href={"/login"} style={{backgroundColor: '#DCCCC0'}}>Login</Button>
-          <Button sx={{ ml: 2 }} variant="outlined" href={"/signup"} style={{backgroundColor: '#DCCCC0'}}>Sign Up</Button>
+          <Button variant="outlined" href={"/login"} style={{backgroundColor: '#DCCCC0'}}>Signup / Login</Button>
 
         </Toolbar>
       </AppBar>
