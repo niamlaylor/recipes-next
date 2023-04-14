@@ -26,7 +26,7 @@ const heroImage = "https://raw.githubusercontent.com/niamlaylor/recipes-next/mai
 
 const styles = {
   boxContainer: {
-      height: 600,
+      height: 700,
       backgroundImage: `url(${heroImage})`,
       backgroundPosition: '25% 40%'
   },
@@ -34,7 +34,7 @@ const styles = {
     height: 500,
     width: '100%',
     paddingTop: 100,
-    paddingBottom: 0,
+    paddingBottom: 100,
     position: 'absolute',
     display: 'flex',
     flexDirection: 'column',
@@ -47,11 +47,11 @@ export default function Hero() {
   return (
       <Box style={styles.boxContainer}>
       <div style={styles.overlay}>
-        <img src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/sifter-logo-white.png"></img>
+        <img src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/sifter-logo-white-sm.png"></img>
         <Typography variant="h2" textAlign='center' color='white' sx={{ mb: 3 }}>Hungry?</Typography>
         <Typography variant="h4" textAlign='center' color='white' sx={{ mb: 3 }}>No profound stories, no ads, no pop-ups. <br /> (Maybe - cookies.)</Typography>
         <Typography variant="h6" textAlign='center' color='white'>Enter the URL of a great recipe, and we'll send it back with what you need – <br /> so you can spend less time scrolling, and more time sautéeing.</Typography>
-        <Button type="submit" variant="contained" size="large" sx={{ alignSelf: "center", mt: 5 }}>
+        <Button type="submit" variant="contained" size="large" sx={{ alignSelf: "center", mt: 5 }} href="/">
               Get Started</Button>
         </div>
     </Box>
