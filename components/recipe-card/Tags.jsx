@@ -29,6 +29,27 @@ export default function TagsInput(props) {
     getLabels();
   }, [props.id]);
 
+  const addLabel = async (e) => {
+    if (e.key !== 'Enter') return;
+    const value = e.target.value;
+    if (!value.trim()) return;
+    const response = await fetch('/api/recipes', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: props.id,
+        labels: [...tags, value]
+      }),
+    });
+    if (response.ok) {
+      setTags([...tags, value]);
+      e.target.value = '';
+    } else {
+      console.error('Failed to update labels.');
+    }
+  };
 
   function handleKeyDown(e) {
     if (e.key !== 'Enter') return;
@@ -48,7 +69,7 @@ export default function TagsInput(props) {
         {tags.map((tag, index) => (
           <Chip key={index} label={tag + ' ×'} onClick={() => removeTag(index)} />
         ))}
-        <TextField variant="standard" size="small" sx={{ pl: 2 }} onKeyDown={handleKeyDown} placeholder="Add a tag" />
+        <TextField variant="standard" size="small" sx={{ pl: 2 }} onKeyDown={addLabel} placeholder="Add a tag" />
       </Stack>
     </Box>
   );
