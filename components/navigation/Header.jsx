@@ -10,9 +10,10 @@ import NavLink from "./NavLink";
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
+import { useState } from 'react';
 
 
-const Search = styled('div')(({ theme }) => ({
+const Search = styled('form')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: "#DCCCC0",
@@ -56,47 +57,67 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Header() {
 
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
   const { data: session } = useSession();
+
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    const query = event.target.elements.search.value;
+    setSearchQuery(query);
+    const userId = session.user.id;
+    const res = await fetch(`/api/search?q=${query}&userId=${userId}`);
+    const data = await res.json();
+    setSearchResults(data);
+  };
 
   if (session) {
     return (
       <Box>
-      <AppBar position="static" style={{backgroundColor: '#DCCCC0'}}>
+      <AppBar position="static" style={{ backgroundColor: '#DCCCC0' }}>
         <Toolbar>
+          <Link href="/" sx={{flexGrow: 1}}> 
+            <Box
+              component="img"
+              sx={{ height: 54 }}
+              alt="Logo"
+              src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/sifterLogo.png"/>
+          </Link>
 
-            <Link href="/" sx={{flexGrow: 1}}> 
-              <Box
-        component="img"
-        sx={{ height: 54 }}
-        alt="Logo"
-        src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/sifterLogo.png"/>
-            </Link>
-
-            <Typography variant="h6" component="div" sx={{color: '#542307' }} >
-          <NavLink  href={"/account"}>{session.user.name}</NavLink>'s List
+          <Typography variant="h6" component="div" sx={{color: '#542307' }} >
+            <NavLink  href={"/account"}>{session.user.name}</NavLink>'s List
           </Typography>
 
-          <Search>
+          <Search onSubmit={handleSearch}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              name="search"
             />
           </Search>
-
-
-
-
-          <Button sx={{ ml: 2 }} variant="outlined" onClick={() => signOut()}>Sign out</Button>
-
-
+          {searchResults.length > 0 && (
+            <Box sx={{ marginTop: 2 }}>
+              <Typography variant="h6" sx={{ marginBottom: 1 }}>
+                Search results for "{searchQuery}":
+              </Typography>
+              <ul>
+                {searchResults.map((recipe) => (
+                  <li key={recipe.id}>
+                    <NavLink href={`/recipes/${recipe.id}`}>
+                      {recipe.title}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </Box>
+          )}
         </Toolbar>
       </AppBar>
-      </Box>
+    </Box>
   );
-
 
 } else {
   return (
