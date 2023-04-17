@@ -35,6 +35,80 @@ export default function AddRecipeForm(props) {
   const { data } = useSession();
   //State for Loading Popup
   const [open, setOpen] = useState(false);
+  //State for Error Popup
+  const [error, setError] = useState(false);
+  const handleErrorOpen = () => setError(true);
+  const handleErrorClose = () => setError(false);
+
+  const ErrorPopup = function () {
+    //Style for error popup modal
+    const style = {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: 400,
+      bgcolor: "background.paper",
+      border: "2px solid #542307",
+      boxShadow: 24,
+      p: 4,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center"
+    };
+  
+    //Return error popup modal
+    return (
+      <div>
+        <Modal
+          open={error}
+          onClose={handleErrorClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <img src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/404-egg-icon.png"></img>
+            <Typography
+              sx={{ color: "#542307" }}
+              id="transition-modal-title"
+              variant="h4"
+              component="h2"
+            >
+              Sorry!
+            </Typography>
+            <Typography
+              sx={{ color: "#542307" }}
+              id="transition-modal-title"
+              variant="h6"
+              component="h2"
+            >
+              This recipe doesn't contain the correct formatting to parse. Please try submitting a different recipe.
+            </Typography>
+            <Button 
+            sx={[
+              {
+                '&:hover': {
+                  color: theme.palette.primary.main,
+                  backgroundColor: 'white',
+                  border: 1,
+                  borderColor: theme.palette.primary.main
+                },
+              backgroundColor: theme.palette.primary.main, 
+              color: 'white',
+              border: 1,
+              borderColor: theme.palette.primary.main
+              },
+            ]} 
+            onClick={handleErrorClose}>
+            Close
+          </Button>
+          </Box>
+        </Modal>
+      </div>
+    );
+  };
+  
 
   const LoadingPopup = function () {
     //Style for loading popup modal
@@ -92,6 +166,7 @@ export default function AddRecipeForm(props) {
     };
     try {
       setOpen(true);
+      setError(false);
       const res = await fetch("/api/get-recipe/", fetchOptions);
       const recipeJson = await res.json();
       console.log("Recipe data:", recipeJson);
@@ -105,6 +180,8 @@ export default function AddRecipeForm(props) {
       const recipeId = await JSON.parse(response.data);
       await router.push(`/recipes/${recipeId.id}`);
     } catch (error) {
+      setError(true);
+      setOpen(false);
       console.log("Axios request error", error);
     }
   };
@@ -154,6 +231,7 @@ export default function AddRecipeForm(props) {
         </Box>
       </Container>
       <LoadingPopup></LoadingPopup>
+      <ErrorPopup></ErrorPopup>
     </ThemeProvider>
   );
 }
