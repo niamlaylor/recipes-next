@@ -85,7 +85,7 @@ export default function Header() {
           </Link>
 
           <Typography variant="h6" component="div" sx={{color: '#542307' }} >
-            <NavLink  href={"/account"}>{session.user.name}</NavLink>'s List
+            {session.user.name}'s List
           </Typography>
 
           <Search onSubmit={handleSearch}>
