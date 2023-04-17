@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import axios from 'axios';
 import RecipeList from '../components/RecipeList';
+import EmptyRecipes from '../components/errors/EmptyRecipes';
 import Header from '../components/navigation/Header';
 import AddRecipeForm from '../components/forms/AddRecipeForm';
 import { getSession } from 'next-auth/react';
@@ -61,7 +62,8 @@ export default function Home({ recipes = [] } ) {
       <Header />
       <main className="mainList">
         <AddRecipeForm /> 
-        <RecipeList recipes={recipes}/>
+        {recipes.length > 0 && <RecipeList recipes={recipes}/>}
+        {recipes.length === 0 && <EmptyRecipes/>}
        </main>
 
        <Slide in={!!trigger}>
