@@ -22,6 +22,9 @@ export async function getServerSideProps(context) {
 
   const { id } = context.params;
 
+  if (!Number(id)) {
+    return { notFound: true };
+  }
   const recipe = await prisma.recipe.findUnique({
     where: { id: Number(id) },
   });
