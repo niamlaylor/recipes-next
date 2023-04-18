@@ -98,7 +98,7 @@ export default function Header() {
               name="search"
             />
           </Search>
-          {searchResults.length > 0 && (
+          {searchResults.length > 0 ? (
             <Box sx={{ marginTop: 2 }}>
               <Typography variant="h6" sx={{ marginBottom: 1 }}>
                 Search results for "{searchQuery}":
@@ -112,6 +112,12 @@ export default function Header() {
                   </li>
                 ))}
               </ul>
+            </Box>
+          ) : (
+            <Box sx={{ marginTop: 2 }}>
+              <Typography variant="h6" sx={{ marginBottom: 1 }}>
+                No results
+              </Typography>
             </Box>
           )}
           <Button sx={{ ml: 2 }} variant="outlined" onClick={() => signOut()}>Sign out</Button>
