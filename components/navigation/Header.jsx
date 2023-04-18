@@ -6,58 +6,9 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
 import { useSession, signOut } from 'next-auth/react';
-import NavLink from "./NavLink";
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
-import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-
-
-{/*
-const Search = styled('form')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: "#DCCCC0",
-  '&:hover': {
-    backgroundColor: "white",
-  },
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "#542307",
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}));
-*/}
 
 export default function Header() {
 
@@ -65,12 +16,10 @@ export default function Header() {
   const [searchResults, setSearchResults] = useState([]);
   const { data: session } = useSession();
 
-  const handleSearch = async (event) => {
-    event.preventDefault();
-    const query = event.target.value;
-    setSearchQuery(query);
+  const handleInputChange = async (event, value) => {
+    setSearchQuery(value);
     const userId = session.user.id;
-    const res = await fetch(`/api/search?q=${query}&userId=${userId}`);
+    const res = await fetch(`/api/search?q=${value}&userId=${userId}`);
     const data = await res.json();
     setSearchResults(data);
   };
@@ -92,62 +41,13 @@ export default function Header() {
             {session.user.name}'s List
           </Typography>
 
-{/*
-          <Search onSubmit={handleSearch}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-              name="search"
-            />
-          </Search>
-    */}
-
-          <Autocomplete          
-        onChange={handleSearch}
-        sx={{ pl: 3, minWidth:"200px"}}
-        freeSolo
-        options={searchResults.length < 1 ? ["No results"] : searchResults.map((recipe) => recipe.title)}
-        renderInput={(params) => <TextField {...params} label="Search..." />}
-      />
-
-{/* <Search onSubmit={handleSearch}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-              name="search"
-            />
-          </Search>
-          {searchResults.length > 0 ? (
-            <Box sx={{ marginTop: 2 }}>
-              <Typography variant="h6" sx={{ marginBottom: 1 }}>
-                Search results for "{searchQuery}":
-              </Typography>
-              <ul>
-                {searchResults.map((recipe) => (
-                  <li key={recipe.id}>
-                    <NavLink href={`/recipes/${recipe.id}`}>
-                      {recipe.title}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            </Box>
-          ) : (
-            <Box sx={{ marginTop: 2 }}>
-              <Typography variant="h6" sx={{ marginBottom: 1 }}>
-                No results
-              </Typography>
-            </Box>
-          )}
-*/}
-
-        
+          <Autocomplete
+            onInputChange={handleInputChange}
+            sx={{ pl: 3, minWidth: "200px" }}
+            freeSolo
+            options={searchQuery && searchResults.length < 1 ? ["No results"] : searchResults.map((recipe) => recipe.title)}
+            renderInput={(params) => <TextField {...params} label="Search..." />}
+          />
           <Button sx={{ ml: 2 }} variant="outlined" onClick={() => signOut()}>Sign out</Button>
         </Toolbar>
       </AppBar>
