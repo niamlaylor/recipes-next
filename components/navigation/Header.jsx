@@ -11,8 +11,11 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
 
 
+{/*
 const Search = styled('form')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -54,6 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+*/}
 
 export default function Header() {
 
@@ -63,7 +67,7 @@ export default function Header() {
 
   const handleSearch = async (event) => {
     event.preventDefault();
-    const query = event.target.elements.search.value;
+    const query = event.target.value;
     setSearchQuery(query);
     const userId = session.user.id;
     const res = await fetch(`/api/search?q=${query}&userId=${userId}`);
@@ -88,7 +92,28 @@ export default function Header() {
             {session.user.name}'s List
           </Typography>
 
+{/*
           <Search onSubmit={handleSearch}>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+              name="search"
+            />
+          </Search>
+    */}
+
+          <Autocomplete          
+        onChange={handleSearch}
+        sx={{ pl: 3, minWidth:"200px"}}
+        freeSolo
+        options={searchResults.length < 1 ? ["No results"] : searchResults.map((recipe) => recipe.title)}
+        renderInput={(params) => <TextField {...params} label="Search..." />}
+      />
+
+{/* <Search onSubmit={handleSearch}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -120,6 +145,9 @@ export default function Header() {
               </Typography>
             </Box>
           )}
+*/}
+
+        
           <Button sx={{ ml: 2 }} variant="outlined" onClick={() => signOut()}>Sign out</Button>
         </Toolbar>
       </AppBar>
