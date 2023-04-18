@@ -37,7 +37,7 @@ export default function Footer( ) {
       <PrintFooter>
           <ThemeProvider theme={theme}>
               <Divider sx={{
-                        mt: 15,
+                        mt: 12,
                         position: "sticky",
                         }}>
               </Divider>

@@ -28,8 +28,8 @@ export default function RecipeList({ recipes }) {
   ));
 
   return (
-    <section 
-    style={{ marginLeft: '50px', marginRight: '50px' }}>
+    <section
+    style={{ marginLeft: 'auto', marginRight: 'auto', display: "flex", flexDirection: "column", alignItems: "center"}}>
       
       <ToggleButton
         value="check"
@@ -37,14 +37,14 @@ export default function RecipeList({ recipes }) {
         onClick={handleToggleFavorites}
         sx={{
           flex: "none",
-          color: showFavorites ? 'red' : '#DCCCC0',
+          color: showFavorites ? 'red' : '#DCCCC0'
         }}
       >
         <FilterListIcon style={{ color: '#542307' }} />   
         <FavoriteIcon  />
       </ToggleButton>
       <h3></h3>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} direction="row" alignItems="center" justifyContent="center">
         {recipeList}
       </Grid>
     </section>
