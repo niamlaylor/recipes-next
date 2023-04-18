@@ -114,6 +114,7 @@ export default function Header() {
               </ul>
             </Box>
           )}
+          <Button sx={{ ml: 2 }} variant="outlined" onClick={() => signOut()}>Sign out</Button>
         </Toolbar>
       </AppBar>
     </Box>
