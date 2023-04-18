@@ -83,7 +83,7 @@ export default function TagsInput(props) {
           placeholder="Add a tag"
           onKeyDown={handleAddLabel}
         />
-      <Stack direction="row" spacing={1}>
+      <Stack direction="row" spacing={1} pl={3}>
         {tags.map((tag) => (
           <Chip
             key={tag}
