@@ -37,10 +37,15 @@ export default function Footer( ) {
       <PrintFooter>
           <ThemeProvider theme={theme}>
               <Divider sx={{
-                        mt: 5
+                        mt: 15,
+                        position: "sticky",
                         }}>
               </Divider>
-                <Container maxWidth="lg" position="sticky">
+                <Container sx={{
+                        flexGrow: 1,
+                        justifyContent: "center",
+                        display: "flex"
+                    }}>
                     <Box sx={{
                         flexGrow: 1,
                         justifyContent: "center",
