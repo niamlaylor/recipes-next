@@ -32,6 +32,7 @@ export default function RecipeList({ recipes }) {
     style={{ marginLeft: '50px', marginRight: '50px' }}>
       
       <ToggleButton
+        value="check"
         aria-label="favorite"
         onClick={handleToggleFavorites}
         sx={{
