@@ -14,7 +14,7 @@ export default async function handler(req, res) {
           {
             OR: [
               { labels: { hasSome: [query] } },
-              { title: { contains: query } },
+              { title: { contains: query, mode: 'insensitive' } },
             ],
           },
         ],
