@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ToggleButton from '@mui/material/ToggleButton';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import Fab from '@mui/material/IconButton';
 
 export default function RecipeList({ recipes }) {
   const [showFavorites, setShowFavorites] = useState(false);
@@ -27,22 +28,22 @@ export default function RecipeList({ recipes }) {
     </Grid>
   ));
 
+  
   return (
     <section
-    style={{ marginLeft: 'auto', marginRight: 'auto', display: "flex", flexDirection: "column", alignItems: "center"}}>
+    style={{ marginLeft: 'auto', marginRight: 'auto', flexDirection: "column", alignItems: "start", padding: "auto"}}>
       
-      <ToggleButton
-        value="check"
+      <Fab
         aria-label="favorite"
         onClick={handleToggleFavorites}
         sx={{
-          flex: "none",
-          color: showFavorites ? 'red' : '#DCCCC0'
+          color: showFavorites ? 'red' : '#DCCCC0',
+          ml: 1
         }}
       >
         <FilterListIcon style={{ color: '#542307' }} />   
         <FavoriteIcon  />
-      </ToggleButton>
+      </Fab>
       <h3></h3>
       <Grid container spacing={2} direction="row" alignItems="center" justifyContent="center">
         {recipeList}
