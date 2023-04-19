@@ -9,9 +9,11 @@ import { useSession, signOut } from 'next-auth/react';
 import { useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
+import { useRouter } from 'next/router';
 
 export default function Header() {
 
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const { data: session } = useSession();
@@ -21,7 +23,7 @@ export default function Header() {
     const userId = session.user.id;
     const res = await fetch(`/api/search?q=${value}&userId=${userId}`);
     const data = await res.json();
-    setSearchResults(data);
+    setSearchResults(data.map((recipe) => ({ id: recipe.id, title: recipe.title })));
   };
 
   if (session) {
@@ -45,7 +47,14 @@ export default function Header() {
             onInputChange={handleInputChange}
             sx={{ pl: 3, minWidth: "200px" }}
             freeSolo
-            options={searchQuery && searchResults.length < 1 ? ["No results"] : searchResults.map((recipe) => recipe.title)}
+            options={searchQuery && searchResults.length < 1 ? [{ title: "No results" }] : searchResults}
+            getOptionLabel={(option) => option.title}
+            getOptionSelected={(option, value) => option.id === value.id}
+            onChange={(event, value) => {
+              if (value && value.id) {
+                router.push(`/recipes/${value.id}`);
+              }
+            }}
             renderInput={(params) => <TextField {...params} label="Search..." />}
           />
           <Button sx={{ ml: 2 }} variant="outlined" onClick={() => signOut()}>Sign out</Button>
@@ -80,71 +89,3 @@ export default function Header() {
   );
 }
 }
-
-
-/* OLD HEADER
-
-import { headerNav, headerNavList, headerNavItem } from "../../styles/Header.module.css"
-import NavLink from "./NavLink"
-import Link from "next/link";
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { useSession, signOut } from 'next-auth/react';
-
-export default function Header() {
-
-  const { data: session } = useSession();
-  console.log(session)
-
-  if (session) {
-    return (
-      <header>
-        <nav className={headerNav} role="navigation" aria-label="Site">
-          <ul className={headerNavList}>
-            <li className={headerNavItem}>
- H6 Typography for main links 
-              <Typography variant ="h6" href={"/"} >My List</Typography>
-            </li>
-            <li id="sifterLogo">
-              <Link href={"/"}>
-                <img src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/sifterLogo.png"></img>
-              </Link>
-            </li>
- Button Styles for Login & Sign Up Links
-            <li>
-              <NavLink href={"/account"}>Welcome {session.user.name}</NavLink>
-              <Button variant="contained" size="large" onClick={() => signOut()}>Sign out</Button>
-            </li>
-          </ul>
-        </nav>
-      </header>
-    )
-  } else {
-    return (
-      <header>
-        <nav className={headerNav} role="navigation" aria-label="Site">
-          <ul className={headerNavList}>
-            <li className={headerNavItem}>
-H6 Typography for main links
-              <Typography variant ="h6" href={"/"} >My List</Typography>
-            </li>
-            <li id="sifterLogo">
-              <Link href={"/"}>
-                <img src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/sifterLogo.png"></img>
-              </Link>
-            </li>
-            <li>
-              <Button variant="contained" size="large" href={"/login"}>
-                Login
-              </Button>
-              <Button variant="contained" size="large" href={"/signup"}>
-                Sign up
-              </Button>
-            </li>
-          </ul>
-        </nav>
-      </header>
-    );
-  }
-};
-*/
