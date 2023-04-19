@@ -19,6 +19,10 @@ export default function Header() {
 
   const handleInputChange = async (event, value) => {
     setSearchQuery(value);
+    if (!value) {
+      setSearchResults([]);
+      return;
+    }
     const userId = session.user.id;
     const res = await fetch(`/api/search?q=${value}&userId=${userId}`);
     const data = await res.json();
