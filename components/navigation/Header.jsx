@@ -15,7 +15,7 @@ export default function Header() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const { data: session } = useSession();
+  const { data: session, status: sessionStatus } = useSession();
 
   const handleInputChange = async (event, value) => {
     setSearchQuery(value);
@@ -28,6 +28,25 @@ export default function Header() {
     const data = await res.json();
     setSearchResults(data.map((recipe) => ({ id: recipe.id, title: recipe.title })));
   };
+
+  if (sessionStatus === 'loading') {
+    return (
+      <Box>
+        <AppBar position="static" style={{ backgroundColor: '#DCCCC0' }}>
+          <Toolbar>
+            <Link href="/" sx={{ flexGrow: 1 }}> 
+              <Box
+                component="img"
+                sx={{ height: 54 }}
+                alt="Logo"
+                src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/sifterLogo.png"
+              />
+            </Link>
+          </Toolbar>
+        </AppBar>
+      </Box>
+    );
+  }
 
   if (session) {
     return (
