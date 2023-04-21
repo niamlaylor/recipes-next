@@ -13,7 +13,6 @@ import Typography from '@mui/material/Typography';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DeleteIcon from '@mui/icons-material/Delete';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PrintIcon from '@mui/icons-material/Print';
 import { Box } from '@mui/material';
 import { formattedDomain } from '../../utils/helpers';
@@ -98,8 +97,7 @@ export default function RecipeCard({ recipe }) {
       </CardContent>
 
       <CardActions disableSpacing>
-  <CardContent>
-
+  
 {/* SOURCE  */}
     <Typography>
     <IconButton aria-label="recipe source">
@@ -108,19 +106,6 @@ export default function RecipeCard({ recipe }) {
     <PrintLink style={{ color: '#542307'}} target="_blank" rel="noopener noreferrer" href={recipe.url}>{website}</PrintLink>
     </Typography>
 
-{/* DURATION?  */}
-    <Typography>
-      {recipe.duration === undefined ?
-        <IconButton aria-label="recipe duration">
-          <AccessTimeIcon />
-        </IconButton>
-        :
-        <span></span>
-      }
-      {recipe.duration === undefined ? `${recipe.duration} minutes` : ''}
-    </Typography>
-
-  </CardContent>
 
 {/* PRINT */}
               <IconButton aria-label="print Recipe Card" onClick={() => window.print()}>
