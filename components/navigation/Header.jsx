@@ -17,6 +17,8 @@ export default function Header() {
   const [searchResults, setSearchResults] = useState([]);
   const { data: session, status: sessionStatus } = useSession();
 
+{/*SEARCH BAR HELPERS  */}
+
   const handleInputChange = async (event, value) => {
     setSearchQuery(value);
     if (!value) {
@@ -61,11 +63,15 @@ export default function Header() {
                 src="https://raw.githubusercontent.com/niamlaylor/recipes-next/main/public/sifterLogo.png"
               />
             </Link>
-  
+
+{/*SESSION USER'S LOGGED IN STATE*/}
+
             <Typography variant="h6" component="div" sx={{ color: '#542307' }}>
               {session.user.name}'s List
             </Typography>
   
+{/*SEARCH BAR */}
+
             <Autocomplete
               onInputChange={handleInputChange}
               sx={{ pl: 3, minWidth: "200px" }}
@@ -80,7 +86,8 @@ export default function Header() {
               }}
               renderInput={(params) => <TextField {...params} label="Search..." />}
             />
-  
+{/*SIGN-OUT BUTTON*/}
+
             <Button sx={{ ml: 2 }} variant="outlined" onClick={signOut}>
               Sign out
             </Button>
@@ -89,6 +96,8 @@ export default function Header() {
       </Box>
     );
   } else {
+
+{/*SIGNED OUT STATE*/}
     return (
       <Box>
         <AppBar position="static" style={{ backgroundColor: '#DCCCC0' }}>

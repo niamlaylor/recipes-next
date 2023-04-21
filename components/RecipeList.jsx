@@ -2,7 +2,6 @@ import { useState } from 'react';
 import RecipeListItem from './RecipeListItem';
 import Grid from '@mui/material/Grid';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ToggleButton from '@mui/material/ToggleButton';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import Fab from '@mui/material/IconButton';
 
@@ -32,7 +31,9 @@ export default function RecipeList({ recipes }) {
   return (
     <section
     style={{ marginLeft: 'auto', marginRight: 'auto', flexDirection: "column", alignItems: "start", padding: "auto"}}>
-      
+
+{/*FAVOURITES FILTER*/}
+
       <Fab
         aria-label="favorite"
         onClick={handleToggleFavorites}

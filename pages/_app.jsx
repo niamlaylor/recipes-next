@@ -3,7 +3,7 @@ import { SessionProvider } from 'next-auth/react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Footer from '../components/footer/Footer';
 
-
+// STYLEOVERRIDES used to ignore specific components from Print view
 const theme = createTheme({
   components: {
     MuiCardMedia: {

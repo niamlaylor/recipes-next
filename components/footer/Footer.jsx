@@ -6,7 +6,7 @@ import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
 import styled from '@emotion/styled';
 
-//mediaquery to ignore footer in Print view
+//media query to ignore footer in Print view
 const PrintFooter = styled.footer`
 @media print {
   display: none
