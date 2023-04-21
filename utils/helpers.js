@@ -18,3 +18,20 @@ export const checkIfBelongsToUser = async (sessionValue, prisma, urlId) => {
 
   return paths.find(recipe => recipe.id == urlId );
 };
+
+
+export async function getRecipes(sessionValue, prismaClient) {
+  const recipes = await prismaClient.recipe.findMany({
+    where: {
+      userId: sessionValue.user.id
+    }
+  });
+  const recipesArray = recipes.map(recipe => {
+    return {
+      ...recipe,
+      user_id: Number(recipe.userId),
+      id: Number(recipe.id)
+    }
+  });
+  return recipesArray;
+};
