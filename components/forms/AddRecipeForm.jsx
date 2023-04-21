@@ -167,7 +167,7 @@ export default function AddRecipeForm(props) {
     try {
       setOpen(true);
       setError(false);
-      const res = await fetch("/api/get-recipe/", fetchOptions);
+      const res = await fetch("/api/scraper/", fetchOptions);
       const recipeJson = await res.json();
       console.log("Recipe data:", recipeJson);
       const recipeJsonWithId = {
