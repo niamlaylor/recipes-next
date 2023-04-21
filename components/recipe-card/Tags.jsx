@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Box, Chip, Stack, TextField } from '@mui/material';
 import styled from '@emotion/styled';
 
-//mediaquery to ignore Tags in Print view
+//media query to ignore Tags in Print view
 const PrintBox = styled(Box)`
 @media print {
   display: none
